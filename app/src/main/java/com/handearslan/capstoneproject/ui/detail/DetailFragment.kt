@@ -1,0 +1,69 @@
+package com.handearslan.capstoneproject.ui.detail
+
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.handearslan.capstoneproject.MainApplication
+import androidx.navigation.fragment.findNavController
+import com.handearslan.capstoneproject.R
+import com.handearslan.capstoneproject.common.viewBinding
+import com.handearslan.capstoneproject.data.model.GetProductDetailResponse
+import com.handearslan.capstoneproject.databinding.FragmentDetailBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class DetailFragment : Fragment(R.layout.fragment_detail) {
+
+    private val binding by viewBinding(FragmentDetailBinding::bind)
+
+    private val args by navArgs<DetailFragmentArgs>()
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        getProductDetail(args.id)
+
+        with(binding) {
+            ivBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
+    private fun getProductDetail(id: Int) {
+        MainApplication.productService?.getProductDetail(id)?.enqueue(object :
+            Callback<GetProductDetailResponse> {
+            override fun onResponse(
+                call: Call<GetProductDetailResponse>,
+                response: Response<GetProductDetailResponse>
+            ) {
+                val result = response.body()
+
+                if (result?.status == 200 && result.product != null) {
+                    with(binding) {
+                        result.product.let {
+                            Glide.with(ivProduct).load(it.imageOne).into(ivProduct)
+                            tvTitle.text = it.title
+                            tvPrice.text = "${it.price} ₺"
+                            tvDescription.text = it.description
+
+                        }
+
+                    }
+                } else {
+                    Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<GetProductDetailResponse>, t: Throwable) {
+                Log.e("GetProductDetail", t.message.orEmpty())
+            }
+        })
+    }
+}

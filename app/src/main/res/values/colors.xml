@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple">#c7c2c1</color>
+    <color name="orange">#d5c474</color>
+    <color name="dark_purple">#a19a99</color>
+    <color name="light_purple">#eceaea</color>
+    <color name="d_purple">#f95a61</color>
+    <color name="safran">#f4c430</color>
+    <color name="koyu_safran">#d4af37</color>
+    <color name="pembe">#ffcbdb</color>
+    <color name="lavanta_mavisi">#ccccff</color>
+    <color name="yesil">#163814</color>
+    <color name="bordo">#343434</color>
+    <color name="kahve">#332E33</color>
+    <color name="background">#F4C99D</color>
+
+
+</resources>

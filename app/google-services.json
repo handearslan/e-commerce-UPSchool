@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847229199392",
+    "project_id": "pureglow-668fb",
+    "storage_bucket": "pureglow-668fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847229199392:android:23d310665fcbf1fc2e8845",
+        "android_client_info": {
+          "package_name": "com.handearslan.capstoneproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMHtHlxQo-3DMo2tHkrraf6i1BWLKIrbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
