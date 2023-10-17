@@ -10,11 +10,13 @@
     <color name="safran">#f4c430</color>
     <color name="koyu_safran">#d4af37</color>
     <color name="pembe">#ffcbdb</color>
+    <color name="acik_pembe">#ffdce7</color>
     <color name="lavanta_mavisi">#ccccff</color>
     <color name="yesil">#163814</color>
     <color name="bordo">#343434</color>
     <color name="kahve">#332E33</color>
-    <color name="background">#F4C99D</color>
+    <color name="koyuback">#F4C99D</color>
+    <color name="background">#f3ebd0</color>
 
 
 </resources>

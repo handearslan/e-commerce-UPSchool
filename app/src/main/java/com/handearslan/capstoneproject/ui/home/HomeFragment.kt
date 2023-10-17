@@ -10,6 +10,7 @@ import com.handearslan.capstoneproject.MainApplication
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.data.model.GetProductsResponse
+import com.handearslan.capstoneproject.data.model.Product
 import com.handearslan.capstoneproject.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,13 +22,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val productAdapter = HomeProductAdapter(onProductClick = ::onProductClick)
 
+    private val saleProductAdapter = HomeSaleProductAdapter(onProductClick = ::onProductClick)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getProducts()
 
         with(binding) {
+            // Tüm ürünleri gösteren adapter
             rvProducts.adapter = productAdapter
+
+            // İndirimli ürünleri gösteren adapter
+            rvSaleProduct.adapter = saleProductAdapter
         }
     }
 
@@ -39,6 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 if (result?.status == 200) {
                     productAdapter.submitList(result.products.orEmpty())
+                    saleProductAdapter.submitList(result.products.orEmpty().filter { it.saleState == true })
                 } else {
                     Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
                 }

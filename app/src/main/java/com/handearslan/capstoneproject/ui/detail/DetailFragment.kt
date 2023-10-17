@@ -1,5 +1,6 @@
 package com.handearslan.capstoneproject.ui.detail
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -47,14 +48,31 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                 if (result?.status == 200 && result.product != null) {
                     with(binding) {
-                        result.product.let {
-                            Glide.with(ivProduct).load(it.imageOne).into(ivProduct)
-                            tvTitle.text = it.title
-                            tvPrice.text = "${it.price} ₺"
-                            tvDescription.text = it.description
-
+                        val product = result.product
+                        Glide.with(binding.ivProduct).load(product.imageOne).into(ivProduct)
+                        tvTitle.text = product.title
+                        tvPrice.text = "${product.price} ₺"
+                        tvDescription.text = product.description
+                        // RatingBar'ı bağla ve ürünün puanını ayarla
+                        product.rate?.let { nonNullRate ->
+                            ratingBar.rating = nonNullRate.toFloat()
+                        } ?: run {
+                            // Eğer rate null ise RatingBar'ı varsayılan bir değerle ayarlayabilirsiniz.
+                            ratingBar.rating = 0.0f // Varsayılan değer
                         }
 
+                        if (product.saleState == true) {
+                            // Eğer ürün indirimli ise, indirimli fiyatı göster
+                            tvSalePrice.visibility = View.VISIBLE
+                            tvSalePrice.text = "${product.salePrice} ₺"
+                            tvPrice.paintFlags = tvPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+
+                        } else {
+                            // İndirimli ürün değilse, indirimli fiyatı gizle
+                            tvSalePrice.visibility = View.GONE
+                            tvPrice.paintFlags = 0
+                        }
                     }
                 } else {
                     Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()

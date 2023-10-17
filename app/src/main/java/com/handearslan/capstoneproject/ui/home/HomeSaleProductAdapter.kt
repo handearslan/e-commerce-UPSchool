@@ -11,21 +11,23 @@ import com.bumptech.glide.Glide
 import com.handearslan.capstoneproject.data.model.Product
 import com.handearslan.capstoneproject.databinding.ItemProductBinding
 
-class HomeProductAdapter(
+class HomeSaleProductAdapter(
     private val onProductClick: (Int) -> Unit
-) : ListAdapter<Product, HomeProductAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
+) : ListAdapter<Product, HomeSaleProductAdapter.SaleProductViewHolder>(SaleProductDiffUtilCallBack()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleProductViewHolder {
+        return SaleProductViewHolder(
             ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onProductClick
         )
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: SaleProductViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
 
-    class ProductViewHolder(
+
+    class SaleProductViewHolder(
         private val binding: ItemProductBinding,
         private val onProductClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -33,12 +35,12 @@ class HomeProductAdapter(
         fun bind(product: Product) {
             with(binding) {
                 tvTitle.text = product.title
-                tvPrice.text = "${product.price} ₺"
+                tvPrice.text = "${product.price.toString()} ₺"
+                tvSalePrice.text = "${product.salePrice.toString()} ₺" // İndirimli fiyat alanı
 
-                // Sadece indirimli ürünlerde tv_sale_price'ı göster
+                // Sadece discounted (indirimli) ürünleri göster
                 if (product.saleState == true) {
                     tvSalePrice.visibility = View.VISIBLE
-                    tvSalePrice.text = "${product.salePrice} ₺"
                     tvPrice.paintFlags = tvPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
                     tvSalePrice.visibility = View.GONE
@@ -54,7 +56,8 @@ class HomeProductAdapter(
         }
     }
 
-    class ProductDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
+
+    class SaleProductDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
         }
@@ -62,5 +65,6 @@ class HomeProductAdapter(
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
+
     }
 }
