@@ -99,8 +99,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
                     if (result?.status == 200) {
                         Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(CartFragmentDirections.cartToSelf())
-
                         getCartProducts(id)
                     } else {
                         Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
@@ -131,7 +129,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                         Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
                         findNavController().navigate(CartFragmentDirections.cartToSelf())
                         getCartProducts(id)
-
                     } else {
                         Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
                     }
