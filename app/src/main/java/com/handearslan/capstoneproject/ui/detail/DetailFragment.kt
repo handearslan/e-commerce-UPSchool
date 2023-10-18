@@ -51,6 +51,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             btnAddCart.setOnClickListener {
                 addToCart(args.id)
             }
+
+            ivEmptyFav.setOnClickListener{
+                ivEmptyFav.visibility = View.GONE
+                ivFav.visibility = View.VISIBLE
+            }
         }
     }
 
