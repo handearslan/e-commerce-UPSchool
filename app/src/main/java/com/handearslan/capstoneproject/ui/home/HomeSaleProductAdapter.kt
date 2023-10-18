@@ -26,7 +26,6 @@ class HomeSaleProductAdapter(
         holder.bind(getItem(position))
     }
 
-
     class SaleProductViewHolder(
         private val binding: ItemProductBinding,
         private val onProductClick: (Int) -> Unit
@@ -36,9 +35,8 @@ class HomeSaleProductAdapter(
             with(binding) {
                 tvTitle.text = product.title
                 tvPrice.text = "${product.price.toString()} ₺"
-                tvSalePrice.text = "${product.salePrice.toString()} ₺" // İndirimli fiyat alanı
+                tvSalePrice.text = "${product.salePrice.toString()} ₺"
 
-                // Sadece discounted (indirimli) ürünleri göster
                 if (product.saleState == true) {
                     tvSalePrice.visibility = View.VISIBLE
                     tvPrice.paintFlags = tvPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -56,7 +54,6 @@ class HomeSaleProductAdapter(
         }
     }
 
-
     class SaleProductDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id
@@ -65,6 +62,5 @@ class HomeSaleProductAdapter(
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem == newItem
         }
-
     }
 }

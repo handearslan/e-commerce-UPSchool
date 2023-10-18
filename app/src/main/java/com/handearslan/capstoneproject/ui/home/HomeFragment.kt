@@ -10,7 +10,6 @@ import com.handearslan.capstoneproject.MainApplication
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.data.model.GetProductsResponse
-import com.handearslan.capstoneproject.data.model.Product
 import com.handearslan.capstoneproject.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,23 +38,28 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun getProducts() {
-        MainApplication.productService?.getProducts()?.enqueue(object : Callback<GetProductsResponse> {
+        MainApplication.productService?.getProducts()
+            ?.enqueue(object : Callback<GetProductsResponse> {
 
-            override fun onResponse(call: Call<GetProductsResponse>, response: Response<GetProductsResponse>) {
-                val result = response.body()
+                override fun onResponse(
+                    call: Call<GetProductsResponse>,
+                    response: Response<GetProductsResponse>
+                ) {
+                    val result = response.body()
 
-                if (result?.status == 200) {
-                    productAdapter.submitList(result.products.orEmpty())
-                    saleProductAdapter.submitList(result.products.orEmpty().filter { it.saleState == true })
-                } else {
-                    Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                    if (result?.status == 200) {
+                        productAdapter.submitList(result.products.orEmpty())
+                        saleProductAdapter.submitList(
+                            result.products.orEmpty().filter { it.saleState == true })
+                    } else {
+                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<GetProductsResponse>, t: Throwable) {
-                Log.e("GetProducts", t.message.orEmpty())
-            }
-        })
+                override fun onFailure(call: Call<GetProductsResponse>, t: Throwable) {
+                    Log.e("GetProducts", t.message.orEmpty())
+                }
+            } )
     }
 
     private fun onProductClick(id: Int) {

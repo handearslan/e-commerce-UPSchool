@@ -10,10 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.handearslan.capstoneproject.R
 
-
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    private val splash_delay: Long = 3000 // Millisaniye cinsinden gösterilecek süre (3 saniye)
+    private val splash_screen_delay: Long = 3000
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,16 +20,14 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_splash, container, false)
 
-        // Belirtilen süre sonra ana ekrana yönlendirme yapmak için Handler kullanalım
         Handler(Looper.getMainLooper()).postDelayed({
-            navigateToNextScreen()
-        }, splash_delay)
+            openNextScreen()
+        }, splash_screen_delay)
 
         return view
     }
 
-    // Bir sonraki ekranı açmak için bu fonksiyonu kullanabilirsiniz
-    private fun navigateToNextScreen() {
+    private fun openNextScreen() {
         val action = SplashFragmentDirections.splashToSignIn()
         findNavController().navigate(action)
     }

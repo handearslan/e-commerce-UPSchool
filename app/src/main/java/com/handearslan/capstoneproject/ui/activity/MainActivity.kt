@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.handearslan.capstoneproject.MainApplication
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
@@ -19,9 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         MainApplication.provideRetrofit(this)
 
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
+        NavigationUI.setupWithNavController(binding.bottomNav, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

@@ -35,7 +35,6 @@ class HomeProductAdapter(
                 tvTitle.text = product.title
                 tvPrice.text = "${product.price} ₺"
 
-                // Sadece indirimli ürünlerde tv_sale_price'ı göster
                 if (product.saleState == true) {
                     tvSalePrice.visibility = View.VISIBLE
                     tvSalePrice.text = "${product.salePrice} ₺"

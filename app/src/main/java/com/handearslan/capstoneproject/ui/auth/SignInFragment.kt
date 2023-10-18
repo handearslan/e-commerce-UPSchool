@@ -28,7 +28,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         sharedPref = requireActivity().getSharedPreferences(
             "AppSettings",
             Context.MODE_PRIVATE
-        ) //sharedPref i ayağa kaldırdık önce
+        )
 
         val islogin = sharedPref.getBoolean("isLogin", false)
 

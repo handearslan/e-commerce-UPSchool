@@ -10,8 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.handearslan.capstoneproject.MainApplication
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
+import com.handearslan.capstoneproject.data.model.AddToCartResponse
+import com.handearslan.capstoneproject.data.model.CartItem
 import com.handearslan.capstoneproject.data.model.GetProductDetailResponse
 import com.handearslan.capstoneproject.databinding.FragmentDetailBinding
 import retrofit2.Call
@@ -24,15 +29,27 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val args by navArgs<DetailFragmentArgs>()
 
+    private lateinit var auth: FirebaseAuth
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getProductDetail(args.id)
 
+        auth = Firebase.auth
+
+        auth.currentUser?.uid
+
+
+
         with(binding) {
             ivBack.setOnClickListener {
                 findNavController().navigateUp()
+            }
+
+            btnAddCart.setOnClickListener {
+                addToCart(args.id)
             }
         }
     }
@@ -84,4 +101,28 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
         })
     }
+
+    private fun addToCart(id: Int) {
+        val cartItem = CartItem(
+            userId = auth.currentUser?.uid.orEmpty(),
+            productId = id,
+        )
+
+        MainApplication.cartService?.addToCart(cartItem)?.enqueue(object : Callback<AddToCartResponse> {
+            override fun onResponse(call: Call<AddToCartResponse>, response: Response<AddToCartResponse>) {
+                val result = response.body()
+
+                if (result?.status == 200) {
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<AddToCartResponse>, t: Throwable) {
+                Log.e("AddToCart", t.message.orEmpty())
+            }
+        })
+    }
+
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.handearslan.capstoneproject.data.source.remote.ProductService
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.handearslan.capstoneproject.data.source.remote.CartService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -16,6 +17,8 @@ class MainApplication : Application() {
         private const val BASE_URL = "https://api.canerture.com/ecommerce/"
 
         var productService: ProductService? = null
+
+        var cartService: CartService? = null
 
         fun provideRetrofit(context: Context) {
 
@@ -39,6 +42,8 @@ class MainApplication : Application() {
             }.build()
 
             productService = retrofit.create(ProductService::class.java)
+
+            cartService = retrofit.create(CartService::class.java)
         }
     }
 }

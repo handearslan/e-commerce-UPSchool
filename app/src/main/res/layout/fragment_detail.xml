@@ -24,18 +24,19 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:text="TextView"
+        android:textColor="@color/kahve"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="9dp"
+        android:layout_width="46dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_last" />
@@ -48,6 +49,7 @@
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/kahve"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_sale_price"
         app:layout_constraintHorizontal_bias="0.5"
@@ -62,6 +64,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/kahve"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -93,5 +96,19 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+
+    <Button
+        android:id="@+id/btn_add_cart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/kahve"
+        android:padding="8dp"
+        android:text="Add Cart"
+        android:textColor="@color/background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
