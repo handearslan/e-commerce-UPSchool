@@ -5,21 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.handearslan.capstoneproject.data.model.DeleteFromCartItem
 import com.handearslan.capstoneproject.data.model.Product
 import com.handearslan.capstoneproject.databinding.ItemCartBinding
+import kotlin.reflect.KFunction1
 
 class CartAdapter(
-    private val onProductClick: (Int) -> Unit
-) : androidx.recyclerview.widget.ListAdapter<Product, CartAdapter.CartViewHolder>(
+    private val onProductClick: (Int) -> Unit,
+    private val onDeleteClick: (Int) -> Unit
+) : ListAdapter<Product, CartAdapter.CartViewHolder>(
     ProductDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         return CartViewHolder(
             ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onProductClick
+            onProductClick, onDeleteClick
         )
     }
 
@@ -28,7 +32,8 @@ class CartAdapter(
 
     class CartViewHolder(
         private val binding: ItemCartBinding,
-        private val onProductClick: (Int) -> Unit
+        private val onProductClick: (Int) -> Unit,
+        private val onDeleteClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
@@ -47,6 +52,11 @@ class CartAdapter(
                     tvPriceCart.paintFlags = 0
                     tvSalePriceCart.visibility = View.GONE
                 }
+
+                ivDelete.setOnClickListener {
+                    onDeleteClick(product.id ?: 1)
+                }
+
                 root.setOnClickListener {
                     onProductClick(product.id ?: 1)
                 }

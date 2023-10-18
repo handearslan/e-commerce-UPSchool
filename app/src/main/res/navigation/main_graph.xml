@@ -16,6 +16,9 @@
         <action
             android:id="@+id/cartToDetail"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/cartToSelf"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

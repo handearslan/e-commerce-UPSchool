@@ -1,6 +1,5 @@
 package com.handearslan.capstoneproject.data.source.remote
 
-import com.google.firebase.firestore.auth.User
 import com.handearslan.capstoneproject.common.Constants.Endpoints.ADD_TO_CART
 import com.handearslan.capstoneproject.common.Constants.Endpoints.CLEAR_CART
 import com.handearslan.capstoneproject.common.Constants.Endpoints.DELETE_FROM_CART
@@ -11,6 +10,7 @@ import com.handearslan.capstoneproject.data.model.ClearCartResponse
 import com.handearslan.capstoneproject.data.model.DeleteFromCartItem
 import com.handearslan.capstoneproject.data.model.DeleteFromCartResponse
 import com.handearslan.capstoneproject.data.model.GetCartProductsResponse
+import com.handearslan.capstoneproject.data.model.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
