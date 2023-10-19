@@ -41,8 +41,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         auth.currentUser?.uid
 
-
-
         with(binding) {
             ivBack.setOnClickListener {
                 findNavController().navigateUp()
@@ -52,7 +50,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 addToCart(args.id)
             }
 
-            ivEmptyFav.setOnClickListener{
+            btnGoCart.setOnClickListener {
+                findNavController().navigate(DetailFragmentDirections.detailToCart())
+            }
+
+            ivEmptyFav.setOnClickListener {
                 ivEmptyFav.visibility = View.GONE
                 ivFav.visibility = View.VISIBLE
             }
@@ -113,21 +115,25 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             productId = id,
         )
 
-        MainApplication.cartService?.addToCart(cartItem)?.enqueue(object : Callback<AddToCartResponse> {
-            override fun onResponse(call: Call<AddToCartResponse>, response: Response<AddToCartResponse>) {
-                val result = response.body()
+        MainApplication.cartService?.addToCart(cartItem)
+            ?.enqueue(object : Callback<AddToCartResponse> {
+                override fun onResponse(
+                    call: Call<AddToCartResponse>,
+                    response: Response<AddToCartResponse>
+                ) {
+                    val result = response.body()
 
-                if (result?.status == 200) {
-                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                    if (result?.status == 200) {
+                        Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<AddToCartResponse>, t: Throwable) {
-                Log.e("AddToCart", t.message.orEmpty())
-            }
-        })
+                override fun onFailure(call: Call<AddToCartResponse>, t: Throwable) {
+                    Log.e("AddToCart", t.message.orEmpty())
+                }
+            })
     }
 
 }

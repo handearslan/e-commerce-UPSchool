@@ -31,6 +31,9 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/detailToCart"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"

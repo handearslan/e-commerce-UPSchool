@@ -29,10 +29,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         getProducts()
 
         with(binding) {
-            // Tüm ürünleri gösteren adapter
             rvProducts.adapter = productAdapter
 
-            // İndirimli ürünleri gösteren adapter
             rvSaleProduct.adapter = saleProductAdapter
         }
     }

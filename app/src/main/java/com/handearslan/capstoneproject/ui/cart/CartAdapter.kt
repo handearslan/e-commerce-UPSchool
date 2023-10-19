@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.handearslan.capstoneproject.data.model.DeleteFromCartItem
 import com.handearslan.capstoneproject.data.model.Product
 import com.handearslan.capstoneproject.databinding.ItemCartBinding
-import kotlin.reflect.KFunction1
 
 class CartAdapter(
     private val onProductClick: (Int) -> Unit,
