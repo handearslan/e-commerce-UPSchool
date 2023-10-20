@@ -57,6 +57,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             ivEmptyFav.setOnClickListener {
                 ivEmptyFav.visibility = View.GONE
                 ivFav.visibility = View.VISIBLE
+                // addToFav(args.id)
             }
         }
     }
@@ -77,23 +78,20 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         tvTitle.text = product.title
                         tvPrice.text = "${product.price} ₺"
                         tvDescription.text = product.description
-                        // RatingBar'ı bağla ve ürünün puanını ayarla
+
                         product.rate?.let { nonNullRate ->
                             ratingBar.rating = nonNullRate.toFloat()
-                        } ?: run {
-                            // Eğer rate null ise RatingBar'ı varsayılan bir değerle ayarlayabilirsiniz.
-                            ratingBar.rating = 0.0f // Varsayılan değer
                         }
 
                         if (product.saleState == true) {
-                            // Eğer ürün indirimli ise, indirimli fiyatı göster
+
                             tvSalePrice.visibility = View.VISIBLE
                             tvSalePrice.text = "${product.salePrice} ₺"
                             tvPrice.paintFlags = tvPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
 
                         } else {
-                            // İndirimli ürün değilse, indirimli fiyatı gizle
+
                             tvSalePrice.visibility = View.GONE
                             tvPrice.paintFlags = 0
                         }
@@ -135,5 +133,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
             })
     }
+
 
 }

@@ -7,6 +7,8 @@ plugins {
     id("com.google.gms.google-services")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id ("kotlin-parcelize")
+
 
 }
 
@@ -96,9 +98,10 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
-    /* // Room
-     implementation("androidx.room:room-runtime:2.5.2")
-     implementation("androidx.room:room-ktx:2.5.2")*/
+    // Room
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
