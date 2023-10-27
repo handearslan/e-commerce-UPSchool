@@ -1,30 +1,27 @@
 package com.handearslan.capstoneproject.ui.cart
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.handearslan.capstoneproject.MainApplication
 import com.handearslan.capstoneproject.R
+import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
-import com.handearslan.capstoneproject.data.model.ClearCartResponse
-import com.handearslan.capstoneproject.data.model.DeleteFromCartItem
-import com.handearslan.capstoneproject.data.model.DeleteFromCartResponse
-import com.handearslan.capstoneproject.data.model.GetCartProductsResponse
-import com.handearslan.capstoneproject.data.model.User
+import com.handearslan.capstoneproject.common.visible
 import com.handearslan.capstoneproject.databinding.FragmentCartBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private val binding by viewBinding(FragmentCartBinding::bind)
+
+    private val viewModel by viewModels<CartViewModel>()
 
     private lateinit var auth: FirebaseAuth
 
@@ -38,105 +35,73 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
         auth = Firebase.auth
 
-        auth.currentUser?.uid
+        val userId = auth.currentUser?.uid
 
-        getCartProducts(id)
+        if (userId != null) {
+            viewModel.getCartProducts(userId)
+        }
 
         with(binding) {
             rvCart.adapter = cartAdapter
 
             btnClear.setOnClickListener {
-                clearCart(id)
+                viewModel.clearCart(auth.currentUser?.uid.toString())
             }
-
             btnPayment.setOnClickListener {
                 findNavController().navigate(CartFragmentDirections.cartToPayment())
             }
         }
+        observeData()
+    }
+
+    private fun observeData() = with(binding) {
+        viewModel.cartState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                CartViewModel.CartState.Loading -> pbCart.visible()
+
+                is CartViewModel.CartState.SuccessState -> {
+                    pbCart.gone()
+                    cartAdapter.submitList(state.product)
+
+                }
+
+                is CartViewModel.CartState.EmptyScreen -> {
+                    pbCart.gone()
+                    rvCart.gone()
+                    ivEmpty.visible()
+                    tvEmpty.visible()
+                    tvEmpty.text = state.failMessage
+
+                }
+
+                is CartViewModel.CartState.ShowPopUp -> {
+                    pbCart.gone()
+                    Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
+
+                }
+
+                is CartViewModel.CartState.DeleteProduct -> {
+                    pbCart.gone()
+                    Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
+                    viewModel.getCartProducts(auth.currentUser?.uid.toString())
+                }
+
+                is CartViewModel.CartState.ClearCart -> {
+                    pbCart.gone()
+                    Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
+                    viewModel.getCartProducts(auth.currentUser?.uid.toString())
+                }
+            }
+        }
+
     }
 
     private fun onProductClick(id: Int) {
         findNavController().navigate(CartFragmentDirections.cartToDetail(id))
     }
 
-    private fun getCartProducts(id: Int) {
-        val userId = auth.currentUser!!.uid
-        MainApplication.cartService?.getCartProducts(userId)
-            ?.enqueue(object : Callback<GetCartProductsResponse> {
-
-                override fun onResponse(
-                    call: Call<GetCartProductsResponse>,
-                    response: Response<GetCartProductsResponse>
-                ) {
-                    val result = response.body()
-
-                    if (result?.status == 200) {
-                        cartAdapter.submitList(result.products.orEmpty())
-                    } else {
-                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<GetCartProductsResponse>, t: Throwable) {
-                    Log.e("GetCartProducts", t.message.orEmpty())
-                }
-            })
-    }
-
     private fun onDeleteClick(id: Int) {
-        val deleteItem = DeleteFromCartItem(
-            id = id
-        )
-
-        MainApplication.cartService?.deleteFromCart(deleteItem)
-            ?.enqueue(object : Callback<DeleteFromCartResponse> {
-
-                override fun onResponse(
-                    call: Call<DeleteFromCartResponse>,
-                    response: Response<DeleteFromCartResponse>
-                ) {
-                    val result = response.body()
-
-                    if (result?.status == 200) {
-                        Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                        getCartProducts(id)
-                    } else {
-                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<DeleteFromCartResponse>, t: Throwable) {
-                    Log.e("GetCartProducts", t.message.orEmpty())
-                }
-            })
-    }
-
-    private fun clearCart(id: Int) {
-
-        val user = User(
-            userId = auth.currentUser!!.uid
-        )
-
-        MainApplication.cartService?.clearCart(user)
-            ?.enqueue(object : Callback<ClearCartResponse> {
-                override fun onResponse(
-                    call: Call<ClearCartResponse>,
-                    response: Response<ClearCartResponse>
-                ) {
-                    val result = response.body()
-
-                    if (result?.status == 200) {
-                        Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(CartFragmentDirections.cartToSelf())
-                        getCartProducts(id)
-                    } else {
-                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ClearCartResponse>, t: Throwable) {
-                    Log.e("ClearCart", t.message.orEmpty())
-                }
-            })
+        viewModel.onDeleteClick(id)
     }
 }
+

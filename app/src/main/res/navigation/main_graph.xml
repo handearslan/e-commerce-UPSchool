@@ -62,7 +62,7 @@
             android:id="@+id/homeToSearch"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/homeToSıgnIn"
+            android:id="@+id/homeToSignIn"
             app:destination="@id/signInFragment" />
     </fragment>
     <fragment
@@ -106,9 +106,6 @@
         <action
             android:id="@+id/signUpToSıgnIn"
             app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/signUpToHome"
-            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

@@ -25,7 +25,8 @@
             android:backgroundTint="@color/koyu_safran"
             android:drawableStart="@drawable/ic_email"
             android:hint="email"
-            android:textColorHint="#855151" />
+            android:textColorHint="#855151"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +47,8 @@
             android:backgroundTint="@color/koyu_safran"
             android:drawableStart="@drawable/ic_password"
             android:hint="password"
-            android:textColorHint="#855151" />
+            android:textColorHint="#855151"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -56,7 +58,7 @@
         android:backgroundTint="@color/kahve"
         android:padding="8sp"
         android:text="Sign Up"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -68,11 +70,11 @@
         android:id="@+id/tv_have_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="87dp"
+        android:layout_marginEnd="10dp"
         android:text="Already have an account?"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_sign_in"
         app:layout_constraintTop_toBottomOf="@+id/til_password_up"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintVertical_chainStyle="packed" />
@@ -81,12 +83,25 @@
         android:id="@+id/tv_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
+        android:layout_marginEnd="20dp"
         android:text="Sign In"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
-        app:layout_constraintStart_toEndOf="@+id/tv_have_account"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_password_up"
         app:layout_constraintVertical_bias="0.5" />
+
+    <ProgressBar
+        android:id="@+id/pb_sign_up"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

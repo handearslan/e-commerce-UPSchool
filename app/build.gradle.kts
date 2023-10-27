@@ -7,11 +7,8 @@ plugins {
     id("com.google.gms.google-services")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
-    id ("kotlin-parcelize")
-
-
+    id("kotlin-parcelize")
 }
-
 android {
     namespace = "com.handearslan.capstoneproject"
     compileSdk = 34
@@ -25,7 +22,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
 
     buildTypes {
         release {
@@ -99,12 +95,15 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     // Room
-    implementation("androidx.room:room-runtime:2.5.2")
-    implementation("androidx.room:room-ktx:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    //Lottie
+    implementation("com.airbnb.android:lottie:6.1.0")
 
 }

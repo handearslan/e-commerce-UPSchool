@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="317dp"
+        android:layout_height="358dp"
+        android:layout_gravity="center|center_vertical"
         android:src="@drawable/ic_ikonn" />
 
 </FrameLayout>

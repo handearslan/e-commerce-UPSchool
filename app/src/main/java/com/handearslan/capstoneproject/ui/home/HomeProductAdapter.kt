@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.handearslan.capstoneproject.data.model.Product
+import com.handearslan.capstoneproject.data.model.response.ProductListUI
 import com.handearslan.capstoneproject.databinding.ItemProductBinding
 
 class HomeProductAdapter(
     private val onProductClick: (Int) -> Unit
-) : ListAdapter<Product, HomeProductAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
+) : ListAdapter<ProductListUI, HomeProductAdapter.ProductViewHolder>(ProductDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         return ProductViewHolder(
@@ -30,7 +30,7 @@ class HomeProductAdapter(
         private val onProductClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: ProductListUI) {
             with(binding) {
                 tvTitle.text = product.title
                 tvPrice.text = "${product.price} ₺"
@@ -53,12 +53,12 @@ class HomeProductAdapter(
         }
     }
 
-    class ProductDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class ProductDiffUtilCallBack : DiffUtil.ItemCallback<ProductListUI>() {
+        override fun areItemsTheSame(oldItem: ProductListUI, newItem: ProductListUI): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductListUI, newItem: ProductListUI): Boolean {
             return oldItem == newItem
         }
     }

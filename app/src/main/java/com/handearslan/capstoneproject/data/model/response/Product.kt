@@ -1,4 +1,4 @@
-package com.handearslan.capstoneproject.data.model
+package com.handearslan.capstoneproject.data.model.response
 
 data class Product(
     val id: Int?,

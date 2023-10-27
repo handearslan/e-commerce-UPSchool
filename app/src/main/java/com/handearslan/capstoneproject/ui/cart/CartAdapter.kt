@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.handearslan.capstoneproject.data.model.Product
+import com.handearslan.capstoneproject.data.model.response.ProductListUI
 import com.handearslan.capstoneproject.databinding.ItemCartBinding
 
 class CartAdapter(
     private val onProductClick: (Int) -> Unit,
     private val onDeleteClick: (Int) -> Unit
-) : ListAdapter<Product, CartAdapter.CartViewHolder>(
+) : ListAdapter<ProductListUI, CartAdapter.CartViewHolder>(
     ProductDiffCallback()
 ) {
 
@@ -34,7 +34,7 @@ class CartAdapter(
         private val onDeleteClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: ProductListUI) {
             with(binding) {
                 Glide.with(ivCart.context).load(product.imageOne).into(ivCart)
                 tvTitleCart.text = product.title
@@ -62,12 +62,12 @@ class CartAdapter(
         }
     }
 
-    class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class ProductDiffCallback : DiffUtil.ItemCallback<ProductListUI>() {
+        override fun areItemsTheSame(oldItem: ProductListUI, newItem: ProductListUI): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductListUI, newItem: ProductListUI): Boolean {
             return oldItem == newItem
         }
     }

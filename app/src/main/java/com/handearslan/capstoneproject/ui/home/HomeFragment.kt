@@ -1,23 +1,24 @@
 package com.handearslan.capstoneproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.handearslan.capstoneproject.MainApplication
+import com.google.android.material.snackbar.Snackbar
 import com.handearslan.capstoneproject.R
+import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
-import com.handearslan.capstoneproject.data.model.GetProductsResponse
+import com.handearslan.capstoneproject.common.visible
 import com.handearslan.capstoneproject.databinding.FragmentHomeBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
+
+    private val viewModel by viewModels<HomeViewModel>()
 
     private val productAdapter = HomeProductAdapter(onProductClick = ::onProductClick)
 
@@ -26,38 +27,55 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getProducts()
+        viewModel.getProducts()
+
 
         with(binding) {
             rvProducts.adapter = productAdapter
 
             rvSaleProduct.adapter = saleProductAdapter
+
+            ibLogOut.setOnClickListener {
+                findNavController().navigate(R.id.homeToSignIn)
+                viewModel.logOut()
+            }
         }
+
+        observeData()
     }
 
-    private fun getProducts() {
-        MainApplication.productService?.getProducts()
-            ?.enqueue(object : Callback<GetProductsResponse> {
-
-                override fun onResponse(
-                    call: Call<GetProductsResponse>,
-                    response: Response<GetProductsResponse>
-                ) {
-                    val result = response.body()
-
-                    if (result?.status == 200) {
-                        productAdapter.submitList(result.products.orEmpty())
-                        saleProductAdapter.submitList(
-                            result.products.orEmpty().filter { it.saleState == true })
-                    } else {
-                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
-                    }
+    private fun observeData() = with(binding) {
+        viewModel.homeState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                HomeViewModel.HomeState.Loading -> {
+                    pbSale.visible()
+                    pbProducts.visible()
                 }
 
-                override fun onFailure(call: Call<GetProductsResponse>, t: Throwable) {
-                    Log.e("GetProducts", t.message.orEmpty())
+                is HomeViewModel.HomeState.SuccessState -> {
+                    pbSale.gone()
+                    pbProducts.gone()
+                    productAdapter.submitList(state.products)
+                    saleProductAdapter.submitList(state.saleProducts)
+
                 }
-            } )
+
+                is HomeViewModel.HomeState.EmptyScreen -> {
+                    pbSale.gone()
+                    pbProducts.gone()
+                    ivEmpty.visible()
+                    tvEmpty.visible()
+                    tvEmpty.text = state.failMessage
+                }
+
+                is HomeViewModel.HomeState.ShowPopUp -> {
+                    pbSale.gone()
+                    pbProducts.gone()
+                    Snackbar.make(requireView(), state.errorMessage, 1000).show()
+                }
+            }
+        }
+
     }
 
     private fun onProductClick(id: Int) {

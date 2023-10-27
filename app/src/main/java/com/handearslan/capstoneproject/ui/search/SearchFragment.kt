@@ -1,24 +1,23 @@
 package com.handearslan.capstoneproject.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.handearslan.capstoneproject.MainApplication
+import com.google.android.material.snackbar.Snackbar
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
-import com.handearslan.capstoneproject.data.model.GetProductsResponse
 import com.handearslan.capstoneproject.databinding.FragmentSearchBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private val binding by viewBinding(FragmentSearchBinding::bind)
+
+    private val viewModel by viewModels<SearchViewModel>()
 
     private val searchAdapter = SearchAdapter(
         onProductClick = ::onProductClick
@@ -37,7 +36,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText != null && newText.length > 3) {
-                        performSearch(newText)
+                        viewModel.getSearchResult(newText)
                     } else {
                         searchAdapter.submitList(emptyList())
                     }
@@ -45,33 +44,39 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             })
         }
+
+
+        observeData()
     }
 
+    private fun observeData()= with(binding) {
+        viewModel.searchState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                SearchViewModel.SearchState.Loading -> {
+                    pbSearch.visibility = View.VISIBLE
+                }
+
+                is SearchViewModel.SearchState.SuccessState -> {
+                    pbSearch.visibility = View.GONE
+                    searchAdapter.submitList(state.product)
+                }
+
+                is SearchViewModel.SearchState.EmptyScreen -> {
+                    pbSearch.visibility = View.GONE
+                    searchAdapter.submitList(emptyList())
+                    Snackbar.make(requireView(), state.failMessage, Snackbar.LENGTH_SHORT).show()
+                }
+
+                is SearchViewModel.SearchState.ShowPopUp -> {
+                    pbSearch.visibility = View.GONE
+                    Snackbar.make(requireView(), state.errorMessage, 1000).show()
+                }
+            }
+        }
+
+
+    }
     private fun onProductClick(id: Int) {
         findNavController().navigate(SearchFragmentDirections.searchToDetail(id))
-    }
-
-
-    private fun performSearch(query: String) {
-
-        MainApplication.productService?.getSearchResult(query)
-            ?.enqueue(object : Callback<GetProductsResponse> {
-                override fun onResponse(
-                    call: Call<GetProductsResponse>,
-                    response: Response<GetProductsResponse>
-                ) {
-                    val result = response.body()
-
-                    if (result?.status == 200) {
-                        searchAdapter.submitList(result.products.orEmpty())
-                    } else {
-                        Toast.makeText(requireContext(), result?.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<GetProductsResponse>, t: Throwable) {
-                    Log.e("SearchFragment", t.message.orEmpty())
-                }
-            })
     }
 }

@@ -8,7 +8,9 @@ import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.databinding.FragmentPaymentBinding
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PaymentFragment : Fragment(R.layout.fragment_payment) {
 
     private val binding by viewBinding(FragmentPaymentBinding::bind)

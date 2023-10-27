@@ -58,6 +58,7 @@
             android:hint="Card Owner"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="74dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,9 +78,12 @@
             android:id="@+id/et_card_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Card Number"
+            android:maxLength="16"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="2dp"
             tools:layout_editor_absoluteY="148dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -104,7 +108,8 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:textAlignment="gravity"
-            android:textColor="@color/kahve" />
+            android:textColor="@color/kahve"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -125,8 +130,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="CVC"
+            android:maxLength="3"
+            android:inputType="number"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="301dp"
             tools:layout_editor_absoluteY="237dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -149,8 +157,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Month"
+            android:maxLength="2"
+            android:inputType="number"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="48dp"
             tools:layout_editor_absoluteY="237dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -171,8 +182,11 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:hint="Year"
+            android:maxLength="4"
+            android:inputType="number"
             android:textAlignment="center"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="163dp"
             tools:layout_editor_absoluteY="237dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -198,6 +212,7 @@
             android:paddingEnd="8dp"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="443dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -223,6 +238,7 @@
             android:paddingEnd="8dp"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
+            android:textSize="14sp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="513dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -246,8 +262,9 @@
             android:hint="Address Title"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:textAlignment="gravity"
             android:textColor="@color/kahve"
-            android:textAlignment="gravity" />
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -257,7 +274,7 @@
         android:backgroundTint="@color/kahve"
         android:text="Complete Payment"
         android:textColor="@color/background"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -266,11 +283,52 @@
 
     <ImageView
         android:id="@+id/iv_back_payment"
-        android:layout_width="47dp"
-        android:layout_height="48dp"
+        android:layout_width="42dp"
+        android:layout_height="41dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_back_last"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tv_empty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/ic_empty" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
+
+
+    <ProgressBar
+        android:id="@+id/pb_detail"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.handearslan.capstoneproject.data.model.Product
+import com.handearslan.capstoneproject.data.model.response.Product
 import com.handearslan.capstoneproject.databinding.ItemFavBinding
 
 

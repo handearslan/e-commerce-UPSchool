@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.handearslan.capstoneproject.data.model.Product
+import com.handearslan.capstoneproject.data.model.response.ProductListUI
 import com.handearslan.capstoneproject.databinding.ItemSearchBinding
 
 class SearchAdapter(
 
     private val onProductClick: (Int) -> Unit
-) : ListAdapter<Product, SearchAdapter.ProductSearchViewHolder>(ProductSearchDiffUtilCallBack()) {
+) : ListAdapter<ProductListUI, SearchAdapter.ProductSearchViewHolder>(ProductSearchDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductSearchViewHolder {
         return ProductSearchViewHolder(
@@ -28,7 +28,7 @@ class SearchAdapter(
         private val onProductClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: ProductListUI) {
             with(binding) {
                 tvSearchTitle.text = product.title
                 tvSearchPrice.text = "${product.price} ₺"
@@ -40,12 +40,12 @@ class SearchAdapter(
         }
     }
 
-    class ProductSearchDiffUtilCallBack : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class ProductSearchDiffUtilCallBack : DiffUtil.ItemCallback<ProductListUI>() {
+        override fun areItemsTheSame(oldItem: ProductListUI, newItem: ProductListUI): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: ProductListUI, newItem: ProductListUI): Boolean {
             return oldItem == newItem
         }
     }
