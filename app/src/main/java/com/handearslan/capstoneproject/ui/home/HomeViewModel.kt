@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.response.ProductListUI
+import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -38,11 +39,20 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
         Log.e("HomeViewModel", "Kullanıcı Çıkış Yaptı")
     }
 
+    fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
+        if (product.isFav) {
+            productRepository.deleteFromFavorites(product)
+        } else {
+            productRepository.addToFavorites(product)
+        }
+        getProducts()
+    }
+
     sealed interface HomeState {
         object Loading : HomeState
         data class SuccessState(
-            val products: List<ProductListUI>,
-            val saleProducts: List<ProductListUI>
+            val products: List<ProductUI>,
+            val saleProducts: List<ProductUI>
         ) : HomeState
 
         data class EmptyScreen(val failMessage: String) : HomeState

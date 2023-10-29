@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
 import com.handearslan.capstoneproject.data.model.response.ProductListUI
+import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -59,7 +60,7 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
 
     sealed interface CartState {
         object Loading : CartState
-        data class SuccessState(val product: List<ProductListUI>) : CartState
+        data class SuccessState(val product: List<ProductUI>) : CartState
         data class DeleteProduct(val message: String) : CartState
         data class ClearCart(val message: String) : CartState
         data class EmptyScreen(val failMessage: String) : CartState

@@ -8,5 +8,6 @@ data class ProductListUI(
     val salePrice: Double,
     val imageOne: String,
     val category: String,
+    val isFav: Boolean = false
 
     )

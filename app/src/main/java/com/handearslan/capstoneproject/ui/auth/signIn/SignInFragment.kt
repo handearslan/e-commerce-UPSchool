@@ -1,7 +1,5 @@
-package com.handearslan.capstoneproject.ui.auth
+package com.handearslan.capstoneproject.ui.auth.signIn
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,8 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.R
-import com.handearslan.capstoneproject.common.Resource
+import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
+import com.handearslan.capstoneproject.common.visible
 import com.handearslan.capstoneproject.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,34 +33,28 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
-                if (viewModel.isEmailValid(email) && viewModel.isPasswordValid(password)) {
-                    viewModel.signIn(email, password)
-                    observeSignIn()
-                } else {
-                    Snackbar.make(requireView(), "Invalid email or password", Snackbar.LENGTH_SHORT)
-                        .show()
-                }
+                viewModel.checkInfo(email,password)
             }
-
             tvSignInUp.setOnClickListener {
                 findNavController().navigate(R.id.signInToSıgnUp)
             }
         }
+        observeSignIn()
     }
 
-    private fun observeSignIn() {
-        viewModel.signInResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Resource.Success -> {
+    private fun observeSignIn() = with(binding){
+        viewModel.signInState.observe(viewLifecycleOwner) {state->
+            when(state){
+                SignInViewModel.SignInState.Loading -> pbSignIn.visible()
+
+                SignInViewModel.SignInState.SuccessState -> {
+                    pbSignIn.gone()
                     findNavController().navigate(R.id.signInToHome)
                 }
 
-                is Resource.Fail -> {
-                    Snackbar.make(requireView(), result.failMessage, Snackbar.LENGTH_SHORT).show()
-                }
-
-                is Resource.Error -> {
-                    Snackbar.make(requireView(), result.errorMessage, Snackbar.LENGTH_SHORT).show()
+                is SignInViewModel.SignInState.ShowSnackbar -> {
+                    pbSignIn.gone()
+                    Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

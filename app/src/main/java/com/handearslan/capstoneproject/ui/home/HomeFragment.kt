@@ -10,6 +10,7 @@ import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.common.visible
+import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,9 +21,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val viewModel by viewModels<HomeViewModel>()
 
-    private val productAdapter = HomeProductAdapter(onProductClick = ::onProductClick)
+    private val productAdapter = HomeProductAdapter(onProductClick = ::onProductClick, onFavClick = ::onFavClick)
 
-    private val saleProductAdapter = HomeSaleProductAdapter(onProductClick = ::onProductClick)
+    private val saleProductAdapter = HomeSaleProductAdapter(onProductClick = ::onProductClick, onFavClick = ::onFavClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,10 +76,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
         }
-
     }
 
     private fun onProductClick(id: Int) {
         findNavController().navigate(HomeFragmentDirections.homeToDetail(id))
+    }
+    private fun onFavClick(product: ProductUI) {
+        viewModel.setFavoriteState(product)
     }
 }

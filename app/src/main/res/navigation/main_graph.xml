@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.handearslan.capstoneproject.ui.auth.SignInFragment"
+        android:name="com.handearslan.capstoneproject.ui.auth.signIn.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -100,7 +100,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.handearslan.capstoneproject.ui.auth.SignUpFragment"
+        android:name="com.handearslan.capstoneproject.ui.auth.signUp.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

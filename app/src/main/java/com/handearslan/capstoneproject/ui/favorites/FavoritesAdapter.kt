@@ -9,17 +9,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.handearslan.capstoneproject.data.model.response.Product
+import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.databinding.ItemFavBinding
 
-
 class FavoritesAdapter(
-    private val onProductClick: (Int) -> Unit
-): ListAdapter<Product, FavoritesAdapter.FavoritesViewHolder>(FavProductDiffCallback()) {
+    private val onProductClick: (Int) -> Unit,
+    private val onDeleteClick: (ProductUI) -> Unit
+): ListAdapter<ProductUI, FavoritesAdapter.FavoritesViewHolder>(FavProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         return FavoritesViewHolder(
             ItemFavBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onProductClick
+            onProductClick,
+            onDeleteClick
         )
     }
 
@@ -29,9 +31,10 @@ class FavoritesAdapter(
     class FavoritesViewHolder(
         private val binding: ItemFavBinding,
         private val onProductClick: (Int) -> Unit
+        ,private val onDeleteClick: (ProductUI) -> Unit
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(product: Product) {
+        fun bind(product: ProductUI) {
             with(binding) {
                 Glide.with(ivFav.context).load(product.imageOne).into(ivFav)
                 tvTitleFav.text = product.title
@@ -49,17 +52,21 @@ class FavoritesAdapter(
                 }
 
                 root.setOnClickListener {
-                    onProductClick(product.id ?: 1)
+                    onProductClick(product.id )
+                }
+
+                ivDeleteFav.setOnClickListener {
+                    onDeleteClick(product)
                 }
             }
         }
     }
 
-    class FavProductDiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean =
+    class FavProductDiffCallback : DiffUtil.ItemCallback<ProductUI>() {
+        override fun areItemsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean =
+        override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean =
             oldItem == newItem
     }
 

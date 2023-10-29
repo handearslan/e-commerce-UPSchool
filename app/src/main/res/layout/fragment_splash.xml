@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pembe"
+    android:background="@color/background"
     tools:context=".ui.splash.SplashFragment">
 
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="317dp"
-        android:layout_height="358dp"
+        android:layout_width="wrap_content"
+        android:layout_height="583dp"
         android:layout_gravity="center|center_vertical"
-        android:src="@drawable/ic_ikonn" />
+        android:src="@drawable/ic_ikon" />
 
 </FrameLayout>

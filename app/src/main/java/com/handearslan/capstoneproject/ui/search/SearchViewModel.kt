@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.response.ProductListUI
+import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -31,7 +32,7 @@ class SearchViewModel @Inject constructor(private val productRepository: Product
 
     sealed interface SearchState {
         object Loading : SearchState
-        data class SuccessState(val product: List<ProductListUI>) : SearchState
+        data class SuccessState(val product: List<ProductUI>) : SearchState
         data class EmptyScreen(val failMessage: String) : SearchState
         data class ShowPopUp(val errorMessage: String) : SearchState
     }

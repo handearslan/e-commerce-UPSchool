@@ -34,6 +34,11 @@ class DetailViewModel @Inject constructor(private val productRepository: Product
             productRepository.addToCart(cartItem)
         }
     }
+
+    fun addToFavorites(product: ProductUI) = viewModelScope.launch {
+        productRepository.addToFavorites(product)
+    }
+
 }
 
 sealed interface DetailState {

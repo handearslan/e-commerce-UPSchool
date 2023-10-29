@@ -47,11 +47,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 findNavController().navigate(DetailFragmentDirections.detailToCart())
             }
 
-            ivEmptyFav.setOnClickListener {
-                ivEmptyFav.visibility = View.GONE
-                ivFav.visibility = View.VISIBLE
-                // addToFav(args.id)
-            }
+
         }
 
         observeData()
@@ -65,10 +61,19 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 is DetailState.SuccessState -> {
                     pbDetail.gone()
 
+                    ivEmptyFav.setOnClickListener {
+                        ivEmptyFav.visibility = View.GONE
+                        ivFav.visibility = View.VISIBLE
+                        viewModel.addToFavorites(state.product)
+
+                    }
+
                     Glide.with(ivProduct).load(state.product.imageOne).into(ivProduct)
                     tvTitle.text = state.product.title
                     tvPrice.text = "${state.product.price} ₺"
                     tvDescription.text = state.product.description
+                    tvCategory.text = state.product.category
+                    tvQuantity.text = state.product.count.toString()
 
                     state.product.rate?.let { nonNullRate ->
                         ratingBar.rating = nonNullRate.toFloat()

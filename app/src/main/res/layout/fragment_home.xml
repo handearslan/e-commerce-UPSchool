@@ -71,6 +71,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_sale_product" />
+
             <ImageView
                 android:id="@+id/iv_empty"
                 android:layout_width="100dp"
@@ -97,6 +98,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
 
+            <ImageButton
+                android:id="@+id/ib_log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_log_out" />
 
             <ProgressBar
                 android:id="@+id/pb_products"
@@ -124,14 +132,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_sale"
                 tools:visibility="visible" />
-
-            <ImageButton
-                android:id="@+id/ib_log_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_log_out" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
