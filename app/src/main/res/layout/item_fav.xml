@@ -36,12 +36,25 @@
             app:srcCompat="@drawable/ic_delete" />
 
         <TextView
+            android:id="@+id/tv_title_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/kahve"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_fav"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/tv_categories_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="TextView"
             android:textColor="@color/kahve"
+            android:fontFamily="@font/poppins"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_price_fav"
             app:layout_constraintStart_toEndOf="@+id/iv_fav"
@@ -52,8 +65,8 @@
             android:id="@+id/tv_price_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:textColor="@color/kahve"
+            android:fontFamily="@font/poppins"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_sale_price_fav"
             app:layout_constraintStart_toStartOf="@+id/tv_categories_fav"
@@ -65,24 +78,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="TextView"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/kahve"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_categories_fav" />
 
-        <TextView
-            android:id="@+id/tv_title_fav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="25dp"
-            android:text="TextView"
-            android:textColor="@color/kahve"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_fav"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_fav_full"

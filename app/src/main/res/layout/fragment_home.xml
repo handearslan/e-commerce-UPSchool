@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="8dp"
+                android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:text="Sale Products"
                 android:textColor="@color/bordo"
@@ -41,6 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_sale"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_product" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -62,6 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:scrollbarSize="10dp"
                 android:text="All Products"
@@ -77,26 +80,28 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/tv_empty"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintVertical_bias="0.212"
                 app:srcCompat="@drawable/ic_empty" />
 
             <TextView
                 android:id="@+id/tv_empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.41" />
 
             <ImageButton
                 android:id="@+id/ib_log_out"

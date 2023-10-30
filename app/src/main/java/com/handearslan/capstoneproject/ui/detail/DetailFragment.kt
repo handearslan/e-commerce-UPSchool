@@ -17,6 +17,7 @@ import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.common.visible
 import com.handearslan.capstoneproject.data.model.request.AddToCartRequest
+import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +31,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val args by navArgs<DetailFragmentArgs>()
 
     private lateinit var auth: FirebaseAuth
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,11 +63,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 is DetailState.SuccessState -> {
                     pbDetail.gone()
 
-                    ivEmptyFav.setOnClickListener {
-                        ivEmptyFav.visibility = View.GONE
-                        ivFav.visibility = View.VISIBLE
-                        viewModel.addToFavorites(state.product)
+                    ivEmptyFav.setBackgroundResource(
+                        if (state.product.isFav) R.drawable.ic_fav
+                        else R.drawable.ic_empty_fav
+                    )
 
+                    ivEmptyFav.setOnClickListener {
+                        onFavClick(state.product)
                     }
 
                     Glide.with(ivProduct).load(state.product.imageOne).into(ivProduct)
@@ -113,6 +117,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 }
             }
         }
+    }
+
+    private fun onFavClick(product: ProductUI) {
+        viewModel.setFavoriteState(product)
     }
 }
 

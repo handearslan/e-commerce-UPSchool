@@ -8,12 +8,12 @@
     android:background="@color/kahve"
     android:backgroundTint="@color/background">
 
-
     <TextView
         android:id="@+id/tv_card_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Card Information"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/kahve"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -21,22 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
-        android:id="@+id/tv_address_info"
-        android:layout_width="300dp"
-        android:layout_height="32dp"
-        android:text="Address Information"
-        android:textAlignment="center"
-        android:textColor="@color/kahve"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/til_city"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_cvc"
         app:layout_constraintVertical_bias="0.5" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -56,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Card Owner"
+            android:fontFamily="@font/poppins"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
             android:textSize="14sp"
@@ -80,63 +65,13 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Card Number"
+            android:fontFamily="@font/poppins"
             android:maxLength="16"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="2dp"
             tools:layout_editor_absoluteY="148dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_city"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/til_district"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address_info"
-        app:layout_constraintVertical_bias="0.5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_city"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="City"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textAlignment="gravity"
-            android:textColor="@color/kahve"
-            android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_cvc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:hint="CVC"
-        app:layout_constraintBottom_toTopOf="@+id/tv_address_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/til_year"
-        app:layout_constraintTop_toBottomOf="@+id/til_card_number"
-        app:layout_constraintVertical_bias="0.5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_cvc"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="CVC"
-            android:maxLength="3"
-            android:inputType="number"
-            android:textAlignment="gravity"
-            android:textColor="@color/kahve"
-            android:textSize="14sp"
-            tools:layout_editor_absoluteX="301dp"
-            tools:layout_editor_absoluteY="237dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -158,6 +93,7 @@
             android:layout_height="match_parent"
             android:hint="Month"
             android:maxLength="2"
+            android:fontFamily="@font/poppins"
             android:inputType="number"
             android:textAlignment="gravity"
             android:textColor="@color/kahve"
@@ -184,11 +120,83 @@
             android:hint="Year"
             android:maxLength="4"
             android:inputType="number"
+            android:fontFamily="@font/poppins"
             android:textAlignment="center"
             android:textColor="@color/kahve"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="163dp"
             tools:layout_editor_absoluteY="237dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_cvc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:hint="CVC"
+        app:layout_constraintBottom_toTopOf="@+id/tv_address_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/til_year"
+        app:layout_constraintTop_toBottomOf="@+id/til_card_number"
+        app:layout_constraintVertical_bias="0.5">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_cvc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="CVC"
+            android:maxLength="3"
+            android:fontFamily="@font/poppins"
+            android:inputType="number"
+            android:textAlignment="gravity"
+            android:textColor="@color/kahve"
+            android:textSize="14sp"
+            tools:layout_editor_absoluteX="301dp"
+            tools:layout_editor_absoluteY="237dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_address_info"
+        android:layout_width="300dp"
+        android:layout_height="32dp"
+        android:text="Address Information"
+        android:textAlignment="center"
+        android:textColor="@color/kahve"
+        android:fontFamily="@font/poppins"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/til_city"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_cvc"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/til_district"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address_info"
+        app:layout_constraintVertical_bias="0.5"
+        app:startIconDrawable="@drawable/ic_location">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_city"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins"
+            android:hint="City"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@color/kahve"
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -201,12 +209,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_city"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        app:startIconDrawable="@drawable/ic_location">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_district"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:hint="District"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -227,12 +237,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_district"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        app:startIconDrawable="@drawable/ic_location">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:hint="Address"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -253,12 +265,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_address"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        app:startIconDrawable="@drawable/ic_location">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_address_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:hint="Address Title"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -273,6 +287,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/kahve"
         android:text="Complete Payment"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/background"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -287,7 +302,7 @@
         android:layout_height="41dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/ic_back_last"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -310,13 +325,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textSize="20sp"
+        android:fontFamily="@font/poppins"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
-
 
     <ProgressBar
         android:id="@+id/pb_detail"

@@ -35,8 +35,13 @@ class DetailViewModel @Inject constructor(private val productRepository: Product
         }
     }
 
-    fun addToFavorites(product: ProductUI) = viewModelScope.launch {
-        productRepository.addToFavorites(product)
+    fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
+        if (product.isFav) {
+            productRepository.deleteFromFavorites(product)
+        } else {
+            productRepository.addToFavorites(product)
+        }
+        getProductDetail(product.id)
     }
 
 }
