@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.handearslan.capstoneproject.R
@@ -55,7 +54,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                     tvEmpty.text = state.failMessage
                 }
 
-                is FavoritesState.ShowPopUp -> {
+                is FavoritesState.ShowSnackbar -> {
                     pbFav.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }

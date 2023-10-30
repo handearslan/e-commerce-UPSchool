@@ -52,22 +52,22 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun observeData()= with(binding) {
         viewModel.searchState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                SearchViewModel.SearchState.Loading -> {
+                SearchState.Loading -> {
                     pbSearch.visibility = View.VISIBLE
                 }
 
-                is SearchViewModel.SearchState.SuccessState -> {
+                is SearchState.SuccessState -> {
                     pbSearch.visibility = View.GONE
                     searchAdapter.submitList(state.product)
                 }
 
-                is SearchViewModel.SearchState.EmptyScreen -> {
+                is SearchState.EmptyScreen -> {
                     pbSearch.visibility = View.GONE
                     searchAdapter.submitList(emptyList())
                     Snackbar.make(requireView(), state.failMessage, Snackbar.LENGTH_SHORT).show()
                 }
 
-                is SearchViewModel.SearchState.ShowPopUp -> {
+                is SearchState.ShowSnackbar -> {
                     pbSearch.visibility = View.GONE
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }

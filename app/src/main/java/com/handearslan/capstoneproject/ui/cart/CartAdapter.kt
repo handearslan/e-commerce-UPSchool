@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.handearslan.capstoneproject.data.model.response.ProductListUI
 import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.databinding.ItemCartBinding
 

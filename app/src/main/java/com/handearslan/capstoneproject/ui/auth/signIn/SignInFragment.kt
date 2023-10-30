@@ -45,14 +45,14 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private fun observeSignIn() = with(binding){
         viewModel.signInState.observe(viewLifecycleOwner) {state->
             when(state){
-                SignInViewModel.SignInState.Loading -> pbSignIn.visible()
+                SignInState.Loading -> pbSignIn.visible()
 
-                SignInViewModel.SignInState.SuccessState -> {
+                SignInState.SuccessState -> {
                     pbSignIn.gone()
                     findNavController().navigate(R.id.signInToHome)
                 }
 
-                is SignInViewModel.SignInState.ShowSnackbar -> {
+                is SignInState.ShowSnackbar -> {
                     pbSignIn.gone()
                     Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
                 }

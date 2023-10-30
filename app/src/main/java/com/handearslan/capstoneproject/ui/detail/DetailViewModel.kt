@@ -25,7 +25,7 @@ class DetailViewModel @Inject constructor(private val productRepository: Product
         _detailState.value = when (val result = productRepository.getProductDetail(id)) {
             is Resource.Success -> DetailState.SuccessState(result.data)
             is Resource.Fail -> DetailState.EmptyScreen(result.failMessage)
-            is Resource.Error -> DetailState.ShowPopUp(result.errorMessage)
+            is Resource.Error -> DetailState.ShowSnackbar(result.errorMessage)
         }
     }
 
@@ -50,5 +50,5 @@ sealed interface DetailState {
     object Loading : DetailState
     data class SuccessState(val product: ProductUI) : DetailState
     data class EmptyScreen(val failMessage: String) : DetailState
-    data class ShowPopUp(val errorMessage: String) : DetailState
+    data class ShowSnackbar(val errorMessage: String) : DetailState
 }

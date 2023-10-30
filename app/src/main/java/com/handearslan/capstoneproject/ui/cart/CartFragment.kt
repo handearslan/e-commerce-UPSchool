@@ -57,15 +57,15 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     private fun observeData() = with(binding) {
         viewModel.cartState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                CartViewModel.CartState.Loading -> pbCart.visible()
+                CartState.Loading -> pbCart.visible()
 
-                is CartViewModel.CartState.SuccessState -> {
+                is CartState.SuccessState -> {
                     pbCart.gone()
                     cartAdapter.submitList(state.product)
 
                 }
 
-                is CartViewModel.CartState.EmptyScreen -> {
+                is CartState.EmptyScreen -> {
                     pbCart.gone()
                     rvCart.gone()
                     ivEmpty.visible()
@@ -74,19 +74,19 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
                 }
 
-                is CartViewModel.CartState.ShowPopUp -> {
+                is CartState.ShowSnackbar -> {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
 
                 }
 
-                is CartViewModel.CartState.DeleteProduct -> {
+                is CartState.DeleteProduct -> {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
                     viewModel.getCartProducts(auth.currentUser?.uid.toString())
                 }
 
-                is CartViewModel.CartState.ClearCart -> {
+                is CartState.ClearCart -> {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
                     viewModel.getCartProducts(auth.currentUser?.uid.toString())

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.common.Resource
-import com.handearslan.capstoneproject.data.model.response.ProductListUI
 import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val productRepository: ProductRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val productRepository: ProductRepository) :
+    ViewModel() {
 
     private var _homeState = MutableLiveData<HomeState>()
     val homeState: LiveData<HomeState> get() = _homeState
@@ -29,14 +29,14 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
                 result.data.filter { it.saleState == true })
 
             is Resource.Fail -> HomeState.EmptyScreen(result.failMessage)
-            is Resource.Error -> HomeState.ShowPopUp(result.errorMessage)
+            is Resource.Error -> HomeState.ShowSnackbar(result.errorMessage)
         }
     }
 
     fun logOut() = viewModelScope.launch {
         val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth.signOut()
-        Log.e("HomeViewModel", "Kullanıcı Çıkış Yaptı")
+        Log.e("HomeViewModel", "User Logged Out")
     }
 
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
@@ -47,16 +47,17 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
         }
         getProducts()
     }
-
-    sealed interface HomeState {
-        object Loading : HomeState
-        data class SuccessState(
-            val products: List<ProductUI>,
-            val saleProducts: List<ProductUI>
-        ) : HomeState
-
-        data class EmptyScreen(val failMessage: String) : HomeState
-        data class ShowPopUp(val errorMessage: String) : HomeState
-    }
 }
+
+sealed interface HomeState {
+    object Loading : HomeState
+    data class SuccessState(
+        val products: List<ProductUI>,
+        val saleProducts: List<ProductUI>
+    ) : HomeState
+
+    data class EmptyScreen(val failMessage: String) : HomeState
+    data class ShowSnackbar(val errorMessage: String) : HomeState
+}
+
 

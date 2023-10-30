@@ -48,12 +48,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun observeData() = with(binding) {
         viewModel.homeState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                HomeViewModel.HomeState.Loading -> {
+                HomeState.Loading -> {
                     pbSale.visible()
                     pbProducts.visible()
                 }
 
-                is HomeViewModel.HomeState.SuccessState -> {
+                is HomeState.SuccessState -> {
                     pbSale.gone()
                     pbProducts.gone()
                     productAdapter.submitList(state.products)
@@ -61,7 +61,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 }
 
-                is HomeViewModel.HomeState.EmptyScreen -> {
+                is HomeState.EmptyScreen -> {
                     pbSale.gone()
                     pbProducts.gone()
                     ivEmpty.visible()
@@ -69,7 +69,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     tvEmpty.text = state.failMessage
                 }
 
-                is HomeViewModel.HomeState.ShowPopUp -> {
+                is HomeState.ShowSnackbar -> {
                     pbSale.gone()
                     pbProducts.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()

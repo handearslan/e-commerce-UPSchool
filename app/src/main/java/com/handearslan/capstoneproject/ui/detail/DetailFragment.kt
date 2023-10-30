@@ -33,7 +33,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private lateinit var auth: FirebaseAuth
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,8 +47,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             btnGoCart.setOnClickListener {
                 findNavController().navigate(DetailFragmentDirections.detailToCart())
             }
-
-
         }
 
         observeData()
@@ -111,7 +108,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     tvEmpty.text = state.failMessage
                 }
 
-                is DetailState.ShowPopUp -> {
+                is DetailState.ShowSnackbar -> {
                     pbDetail.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }

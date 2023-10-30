@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+class SignUpViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
 
     private val _signUpState = MutableLiveData<SignUpState>()
     val signUpState: LiveData<SignUpState> get() = _signUpState
@@ -32,19 +33,20 @@ class SignUpViewModel @Inject constructor(private val authRepository: AuthReposi
             Patterns.EMAIL_ADDRESS.matcher(email).matches().not() -> {
                 _signUpState.value = SignUpState.ShowSnackbar("Invalid email")
             }
+
             password.isEmpty() || password.length <= 6 -> {
                 _signUpState.value = SignUpState.ShowSnackbar("Invalid password")
             }
+
             else -> {
                 signUp(email, password)
             }
-
         }
     }
+}
 
-    sealed interface SignUpState{
-        object Loading: SignUpState
-        object SuccessState: SignUpState
-        data class ShowSnackbar(val errorMessage: String): SignUpState
-    }
+sealed interface SignUpState {
+    object Loading : SignUpState
+    object SuccessState : SignUpState
+    data class ShowSnackbar(val errorMessage: String) : SignUpState
 }

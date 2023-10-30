@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
-import com.handearslan.capstoneproject.data.model.response.ProductListUI
 import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +31,7 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
                 }
 
             is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
-            is Resource.Error -> CartState.ShowPopUp(result.errorMessage)
+            is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
         }
     }
 
@@ -40,9 +39,9 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         _cartState.value = CartState.Loading
 
         _cartState.value = when (val result = productRepository.onDeleteClick(id)) {
-            is Resource.Success -> CartState.DeleteProduct("Product deleted" )
+            is Resource.Success -> CartState.DeleteProduct("Product deleted")
             is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
-            is Resource.Error -> CartState.ShowPopUp(result.errorMessage)
+            is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
         }
     }
 
@@ -50,20 +49,22 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
     fun clearCart(userId: String?) = viewModelScope.launch {
         _cartState.value = CartState.Loading
 
-        _cartState.value = when (val result = productRepository.clearCart(ClearCartRequest(userId = userId))) {
-            is Resource.Success -> CartState.ClearCart("Cart cleared")
-            is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
-            is Resource.Error -> CartState.ShowPopUp(result.errorMessage)
-        }
-    }
-
-
-    sealed interface CartState {
-        object Loading : CartState
-        data class SuccessState(val product: List<ProductUI>) : CartState
-        data class DeleteProduct(val message: String) : CartState
-        data class ClearCart(val message: String) : CartState
-        data class EmptyScreen(val failMessage: String) : CartState
-        data class ShowPopUp(val errorMessage: String) : CartState
+        _cartState.value =
+            when (val result = productRepository.clearCart(ClearCartRequest(userId = userId))) {
+                is Resource.Success -> CartState.ClearCart("Cart cleared")
+                is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
+                is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
+            }
     }
 }
+
+
+sealed interface CartState {
+    object Loading : CartState
+    data class SuccessState(val product: List<ProductUI>) : CartState
+    data class DeleteProduct(val message: String) : CartState
+    data class ClearCart(val message: String) : CartState
+    data class EmptyScreen(val failMessage: String) : CartState
+    data class ShowSnackbar(val errorMessage: String) : CartState
+}
+
