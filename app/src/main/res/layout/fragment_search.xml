@@ -16,8 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_search"
         tools:itemCount="3"
-        android:background="@color/kahve"
-        android:backgroundTint="@color/background"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <SearchView
@@ -25,8 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:fontFamily="@font/poppins"
-        android:background="@color/orange"
-        app:backgroundTint="@color/orange"
+        android:background="@color/soft_pink"
         android:iconifiedByDefault="false"
         android:queryHint="Search Product"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,11 +36,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/rv_search"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_search"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

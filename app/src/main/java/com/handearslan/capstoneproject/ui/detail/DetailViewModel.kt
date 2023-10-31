@@ -43,7 +43,6 @@ class DetailViewModel @Inject constructor(private val productRepository: Product
         }
         getProductDetail(product.id)
     }
-
 }
 
 sealed interface DetailState {

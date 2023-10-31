@@ -8,8 +8,6 @@ data class Product(
     val description: String?,
     val category: String?,
     val imageOne: String?,
-    val imageTwo: String?,
-    val imageThree: String?,
     val rate: Double?,
     val count: Int?,
     val saleState: Boolean?,

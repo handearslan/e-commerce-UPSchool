@@ -30,7 +30,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.getProducts()
 
-
         with(binding) {
             rvProducts.adapter = productAdapter
 
@@ -49,28 +48,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.homeState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 HomeState.Loading -> {
-                    pbSale.visible()
                     pbProducts.visible()
                 }
 
                 is HomeState.SuccessState -> {
-                    pbSale.gone()
                     pbProducts.gone()
                     productAdapter.submitList(state.products)
                     saleProductAdapter.submitList(state.saleProducts)
-
                 }
 
                 is HomeState.EmptyScreen -> {
-                    pbSale.gone()
                     pbProducts.gone()
+                    tvProducts.gone()
+                    tvSale.gone()
                     ivEmpty.visible()
                     tvEmpty.visible()
                     tvEmpty.text = state.failMessage
                 }
 
                 is HomeState.ShowSnackbar -> {
-                    pbSale.gone()
                     pbProducts.gone()
                     Snackbar.make(requireView(), state.errorMessage, 1000).show()
                 }

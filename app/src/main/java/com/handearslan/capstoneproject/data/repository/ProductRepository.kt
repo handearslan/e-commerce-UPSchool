@@ -133,6 +133,11 @@ class ProductRepository(
         productDao.deleteProduct(productUI.mapToProductEntity())
     }
 
+    suspend fun clearAllFromFavorites() {
+        productDao.clearAllFromFavorites()
+    }
+
+
     suspend fun getFavorites(): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {

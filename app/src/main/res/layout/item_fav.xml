@@ -11,12 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_border">
 
         <ImageView
             android:id="@+id/iv_fav"
-            android:layout_width="140dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="135dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -27,8 +28,8 @@
 
         <ImageView
             android:id="@+id/iv_delete_fav"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,58 +38,59 @@
 
         <TextView
             android:id="@+id/tv_title_fav"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/kahve"
-            android:textSize="12sp"
+            android:lines="2"
+            android:maxLines="2"
+            android:textColor="@color/brown"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/iv_fav"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product Title" />
 
         <TextView
             android:id="@+id/tv_categories_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textColor="@color/kahve"
-            android:fontFamily="@font/poppins"
-            android:textSize="12sp"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_price_fav"
             app:layout_constraintStart_toEndOf="@+id/iv_fav"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_fav"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="Category" />
 
         <TextView
             android:id="@+id/tv_price_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/kahve"
-            android:fontFamily="@font/poppins"
-            android:textSize="12sp"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_sale_price_fav"
             app:layout_constraintStart_toStartOf="@+id/tv_categories_fav"
             app:layout_constraintTop_toBottomOf="@+id/tv_categories_fav"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="Price" />
 
         <TextView
             android:id="@+id/tv_sale_price_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/kahve"
-            android:textSize="12sp"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_categories_fav" />
-
+            app:layout_constraintStart_toStartOf="@+id/tv_categories_fav"
+            tools:text="Sale Price" />
 
         <ImageView
             android:id="@+id/iv_fav_full"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="2dp"
             app:layout_constraintEnd_toEndOf="parent"

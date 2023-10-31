@@ -32,12 +32,6 @@ data class ProductEntity(
     @ColumnInfo(name = "imageOne")
     val imageOne: String?,
 
-    /*@ColumnInfo(name = "imageTwo")
-    val imageTwo: String?,
-
-    @ColumnInfo(name = "imageThree")
-    val imageThree: String?,*/
-
     @ColumnInfo(name = "rate")
     val rate: Double?,
 

@@ -8,15 +8,17 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
-        android:layout_width="542dp"
-        android:layout_height="544dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
+        android:layout_width="355dp"
+        android:layout_height="417dp"
+        android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/anim"></com.airbnb.lottie.LottieAnimationView>
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim"
+        />
 
     <Button
         android:id="@+id/btn_continue_shopping"
@@ -24,28 +26,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="114dp"
+        android:layout_marginBottom="150dp"
+        android:backgroundTint="@color/dark_pink"
         android:fontFamily="@font/poppins"
-        android:backgroundTint="@color/kahve"
         android:padding="12dp"
         android:text="Continue Shopping"
-        android:textColor="@color/background"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/pb_success"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

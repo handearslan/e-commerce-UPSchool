@@ -45,7 +45,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             rvCart.adapter = cartAdapter
 
             btnClear.setOnClickListener {
-                viewModel.clearCart(auth.currentUser?.uid.toString())
+                viewModel.clearCart(userId.toString())
             }
             btnPayment.setOnClickListener {
                 findNavController().navigate(CartFragmentDirections.cartToPayment())
@@ -82,13 +82,13 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
                 is CartState.DeleteProduct -> {
                     pbCart.gone()
-                    Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), state.message, 500).show()
                     viewModel.getCartProducts(auth.currentUser?.uid.toString())
                 }
 
                 is CartState.ClearCart -> {
                     pbCart.gone()
-                    Snackbar.make(requireView(), state.message, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), state.message, 500).show()
                     viewModel.getCartProducts(auth.currentUser?.uid.toString())
                 }
             }

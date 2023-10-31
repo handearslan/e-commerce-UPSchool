@@ -49,6 +49,4 @@ object NetworkModule {
     @Provides
     fun provideProductService(retrofit: Retrofit) = retrofit.create(ProductService::class.java)
 
-
-
 }

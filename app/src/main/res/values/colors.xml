@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FCFFFD</color>
     <color name="purple">#c7c2c1</color>
-    <color name="orange">#d5c474</color>
-    <color name="splash">#F4C99D</color>
     <color name="dark_purple">#a19a99</color>
     <color name="light_purple">#eceaea</color>
-    <color name="d_purple">#f95a61</color>
-    <color name="safran">#f4c430</color>
-    <color name="koyu_safran">#d4af37</color>
-    <color name="pembe">#ffcbdb</color>
-    <color name="acik_pembe">#ffdce7</color>
-    <color name="lavanta_mavisi">#ccccff</color>
-    <color name="yesil">#163814</color>
-    <color name="bordo">#343434</color>
-    <color name="kahve">#332E33</color>
-    <color name="koyuback">#F4C99D</color>
-    <color name="background">#f3ebd0</color>
-    <color name="mavi">#83A8A5</color>
-
+    <color name="pink">#ffcbdb</color>
+    <color name="dark_pink">#d80788</color>
+    <color name="soft_pink">#ffdce7</color>
+    <color name="light_pink">#f9bdd6</color>
+    <color name="lavender_blue">#ccccff</color>
+    <color name="brown">#332E33</color>
+    <color name="blue">#232F3E</color>
+    <color name="yellow">#EAB64D</color>
+    <color name="red">#FF0000</color>
 
 </resources>

@@ -19,6 +19,9 @@ interface ProductDao {
     @Delete
     suspend fun deleteProduct(productEntity: ProductEntity)
 
+    @Query("DELETE FROM fav_products")
+    suspend fun clearAllFromFavorites()
+
     @Query("SELECT productId FROM fav_products")
     suspend fun getProductIds(): List<Int>
 }

@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">PureGlow</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invalid_card_number">Invalid card number</string>
+    <string name="invalid_cvc">Invalid cvc</string>
+    <string name="invalid_year">Invalid year</string>
+    <string name="invalid_month">Invalid month</string>
+    <string name="empty_blanks">Please fill all fields</string>
+    <string name="fail">Something went wrong</string>
+
 </resources>

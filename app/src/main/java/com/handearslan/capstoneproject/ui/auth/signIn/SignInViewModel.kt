@@ -26,7 +26,6 @@ class SignInViewModel @Inject constructor(private val authRepository: AuthReposi
             is Resource.Error -> SignInState.ShowSnackbar(result.errorMessage)
             is Resource.Fail -> SignInState.ShowSnackbar(result.failMessage)
         }
-
     }
 
     fun checkInfo(email: String, password: String) {
@@ -35,7 +34,7 @@ class SignInViewModel @Inject constructor(private val authRepository: AuthReposi
                 _signInState.value = SignInState.ShowSnackbar("Invalid email")
             }
 
-            password.isEmpty() || password.length <= 6 -> {
+            password.isEmpty() || password.length <= 5 -> {
                 _signInState.value = SignInState.ShowSnackbar("Invalid password")
             }
 

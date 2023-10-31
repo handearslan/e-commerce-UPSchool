@@ -45,7 +45,6 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         }
     }
 
-
     fun clearCart(userId: String?) = viewModelScope.launch {
         _cartState.value = CartState.Loading
 

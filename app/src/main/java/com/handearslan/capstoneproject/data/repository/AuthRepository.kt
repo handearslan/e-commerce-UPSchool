@@ -17,7 +17,7 @@ class AuthRepository(
                 return Resource.Success(false)
             }
         } catch (e: Exception) {
-            return Resource.Error(e.localizedMessage ?: "Login failed.")
+            return Resource.Error(e.message.orEmpty())
         }
     }
 
@@ -31,7 +31,7 @@ class AuthRepository(
             }
 
         } catch (e: Exception) {
-            return Resource.Error(e.localizedMessage ?: "Registration failed.")
+           return Resource.Error(e.message.orEmpty())
         }
     }
 }

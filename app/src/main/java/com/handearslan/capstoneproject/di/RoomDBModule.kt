@@ -22,5 +22,4 @@ object RoomDBModule {
     @Singleton
     @Provides
     fun provideProductDao(roomDB: ProductRoomDB) = roomDB.productDao()
-
 }

@@ -26,9 +26,6 @@ interface ProductService {
     @GET(GET_PRODUCTS)
     suspend fun getProducts(): Response<GetProductsResponse>
 
-  /*  @GET(GET_SALE_PRODUCTS)
-    suspend fun getSaleProducts(): Response<GetProductsResponse>*/
-
     @GET(GET_PRODUCT_DETAIL)
     suspend fun getProductDetail(
         @Query("id") id: Int

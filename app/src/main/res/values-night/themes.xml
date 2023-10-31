@@ -3,6 +3,14 @@
     <style name="Base.Theme.CapstoneProject" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor" type="">@color/koyu_safran</item>
+        <item name="android:statusBarColor" type="">@color/dark_pink</item>
+        <item name="android:textViewStyle">@style/MyTextView</item>
+    </style>
+
+    <style name="Theme.CapstoneProject" parent="Base.Theme.CapstoneProject" />
+
+    <style name="MyTextView" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/brown</item>
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 </resources>

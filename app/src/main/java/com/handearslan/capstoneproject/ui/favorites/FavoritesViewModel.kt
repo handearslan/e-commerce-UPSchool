@@ -32,6 +32,11 @@ class FavoritesViewModel @Inject constructor(private val productRepository: Prod
         productRepository.deleteFromFavorites(product)
         getFavorites()
     }
+
+    fun clearAllFromFavorites() = viewModelScope.launch {
+        productRepository.clearAllFromFavorites()
+        getFavorites()
+    }
 }
 
 sealed interface FavoritesState {

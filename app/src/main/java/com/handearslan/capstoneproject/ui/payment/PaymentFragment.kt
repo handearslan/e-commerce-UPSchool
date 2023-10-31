@@ -37,23 +37,27 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
 
                 when {
                     addressTitle.isNullOrEmpty() && address.isNullOrEmpty() && city.isNullOrEmpty() && district.isNullOrEmpty() && cardOwner.isNullOrEmpty() && cardNumber.isNullOrEmpty() && cvc.isNullOrEmpty() && month.isNullOrEmpty() && year.isNullOrEmpty() -> {
-                        Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(), getString(R.string.empty_blanks),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     cardNumber?.length != 16 -> {
-                        Toast.makeText(requireContext(), "Invalid card number", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),getString(R.string.invalid_card_number), Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     cvc?.length != 3 -> {
-                        Toast.makeText(requireContext(), "Invalid cvc", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),getString(R.string.invalid_cvc), Toast.LENGTH_SHORT).show()
                     }
 
                     year?.length != 4 -> {
-                        Toast.makeText(requireContext(), "Invalid year", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),getString(R.string.invalid_year), Toast.LENGTH_SHORT).show()
                     }
 
                     month?.length != 2 -> {
-                        Toast.makeText(requireContext(), "Invalid month", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),getString(R.string.invalid_month), Toast.LENGTH_SHORT).show()
                     }
 
                     else -> {

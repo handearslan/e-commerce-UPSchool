@@ -21,7 +21,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private val viewModel by viewModels<FavoritesViewModel>()
 
-    private val favoritesAdapter = FavoritesAdapter(onProductClick = ::onProductClick, onDeleteClick = ::onDeleteClick)
+    private val favoritesAdapter =
+        FavoritesAdapter(onProductClick = ::onProductClick, onDeleteClick = ::onDeleteClick)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +32,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         with(binding) {
             rvFav.adapter = favoritesAdapter
 
+            btnClearFav.setOnClickListener {
+                viewModel.clearAllFromFavorites()
+            }
         }
 
         observeData()
@@ -51,7 +55,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                     ivEmpty.visible()
                     tvEmpty.visible()
                     rvFav.gone()
-                    tvEmpty.text = state.failMessage
+                    tvEmpty.text = "There are no products on your favorites."
                 }
 
                 is FavoritesState.ShowSnackbar -> {

@@ -43,12 +43,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             ivBack.setOnClickListener {
                 findNavController().navigateUp()
             }
-
-            btnGoCart.setOnClickListener {
-                findNavController().navigate(DetailFragmentDirections.detailToCart())
-            }
         }
-
         observeData()
     }
 
@@ -76,8 +71,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     tvCategory.text = state.product.category
                     tvQuantity.text = state.product.count.toString()
 
-                    state.product.rate?.let { nonNullRate ->
-                        ratingBar.rating = nonNullRate.toFloat()
+                    state.product.rate.let { rate ->
+                        ratingBar.rating = rate.toFloat()
                     }
 
                     if (state.product.saleState) {
@@ -91,7 +86,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     btnAddCart.setOnClickListener {
                         val productTitle = state.product.title
                         val message = "$productTitle added to cart"
-                        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireView(), message, 500).show()
 
                         val cartItem = AddToCartRequest(
                             productId = args.id,

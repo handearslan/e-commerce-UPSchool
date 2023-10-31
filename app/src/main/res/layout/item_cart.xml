@@ -7,28 +7,31 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="8dp"
-    app:contentPadding="8dp">
+    app:contentPadding="8dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_border">
 
         <ImageView
             android:id="@+id/iv_cart"
-            android:layout_width="121dp"
-            android:layout_height="159dp"
-            android:layout_marginStart="5dp"
+            android:layout_width="130dp"
+            android:layout_height="135dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/iv_delete"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,51 +40,62 @@
 
         <TextView
             android:id="@+id/tv_title_cart"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/kahve"
-            android:textSize="12sp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="15dp"
+            android:lines="2"
+            android:maxLines="2"
+            android:textColor="@color/brown"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_cart"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/iv_cart"
+            tools:text="Product Title" />
 
         <TextView
             android:id="@+id/tv_categories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/kahve"
-            android:fontFamily="@font/poppins"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_price_cart"
-            app:layout_constraintStart_toEndOf="@+id/iv_cart"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_cart" />
+            android:layout_marginTop="3dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_cart"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_cart"
+            tools:text="Category" />
 
         <TextView
             android:id="@+id/tv_price_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/kahve"
-            android:fontFamily="@font/poppins"
-            android:textSize="12sp"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_sale_price_cart"
             app:layout_constraintStart_toStartOf="@+id/tv_categories"
-            app:layout_constraintTop_toBottomOf="@+id/tv_categories" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_categories"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="Price" />
 
         <TextView
             android:id="@+id/tv_sale_price_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:textColor="@color/kahve"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins"
-            android:textSize="12sp"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/brown"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_categories" />
+            app:layout_constraintStart_toStartOf="@+id/tv_price_cart"
+            tools:text="Sale Price" />
 
-      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

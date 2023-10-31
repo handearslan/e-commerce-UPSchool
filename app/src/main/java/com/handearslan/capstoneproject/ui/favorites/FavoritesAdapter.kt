@@ -14,7 +14,7 @@ import com.handearslan.capstoneproject.databinding.ItemFavBinding
 class FavoritesAdapter(
     private val onProductClick: (Int) -> Unit,
     private val onDeleteClick: (ProductUI) -> Unit
-): ListAdapter<ProductUI, FavoritesAdapter.FavoritesViewHolder>(FavProductDiffCallback()) {
+) : ListAdapter<ProductUI, FavoritesAdapter.FavoritesViewHolder>(FavProductDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         return FavoritesViewHolder(
@@ -29,9 +29,8 @@ class FavoritesAdapter(
 
     class FavoritesViewHolder(
         private val binding: ItemFavBinding,
-        private val onProductClick: (Int) -> Unit
-        ,private val onDeleteClick: (ProductUI) -> Unit
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val onProductClick: (Int) -> Unit, private val onDeleteClick: (ProductUI) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: ProductUI) {
             with(binding) {
@@ -51,7 +50,7 @@ class FavoritesAdapter(
                 }
 
                 root.setOnClickListener {
-                    onProductClick(product.id )
+                    onProductClick(product.id)
                 }
 
                 ivDeleteFav.setOnClickListener {
@@ -68,5 +67,4 @@ class FavoritesAdapter(
         override fun areContentsTheSame(oldItem: ProductUI, newItem: ProductUI): Boolean =
             oldItem == newItem
     }
-
 }
