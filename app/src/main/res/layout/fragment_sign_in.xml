@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.signIn.SignInFragment">
 
-    <ImageView
-        android:id="@+id/iv_sign"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_sign_in"
         android:layout_width="240dp"
-        android:layout_height="175dp"
-        android:background="@drawable/bg_auth"
-        android:src="@drawable/ic_auth"
+        android:layout_height="220dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_sign_in_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_auth" />
 
     <TextView
         android:id="@+id/tv_sign_in_title"
@@ -29,7 +30,7 @@
         app:layout_constraintBottom_toTopOf="@+id/til_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_sign"
+        app:layout_constraintTop_toBottomOf="@+id/lav_sign_in"
         app:layout_constraintVertical_bias="0.5" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -75,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
+            android:inputType="textPassword"
             android:backgroundTint="@color/light_pink"
             android:drawableStart="@drawable/ic_password"
             android:hint="password"

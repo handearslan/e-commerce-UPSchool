@@ -6,5 +6,7 @@
     <string name="invalid_month">Invalid month</string>
     <string name="empty_blanks">Please fill all fields</string>
     <string name="fail">Something went wrong</string>
+    <string name="empty_favorites">There are no products in your favorites.</string>
+    <string name="added_to_cart">%1$s added to cart</string>
 
 </resources>

@@ -55,7 +55,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                     ivEmpty.visible()
                     tvEmpty.visible()
                     rvFav.gone()
-                    tvEmpty.text = "There are no products on your favorites."
+                    tvEmpty.text = getString(R.string.empty_favorites)
                 }
 
                 is FavoritesState.ShowSnackbar -> {

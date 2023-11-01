@@ -85,7 +85,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     }
                     btnAddCart.setOnClickListener {
                         val productTitle = state.product.title
-                        val message = "$productTitle added to cart"
+                        val message = getString(R.string.added_to_cart, productTitle)
                         Snackbar.make(requireView(), message, 500).show()
 
                         val cartItem = AddToCartRequest(
