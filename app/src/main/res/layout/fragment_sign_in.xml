@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.signIn.SignInFragment">
 
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_sign_in"
         android:layout_width="240dp"
