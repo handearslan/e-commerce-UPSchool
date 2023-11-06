@@ -5,16 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.response.ProductUI
+import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val productRepository: ProductRepository) :
+class HomeViewModel @Inject constructor(
+    private val productRepository: ProductRepository,
+    private val authRepository: AuthRepository
+) :
     ViewModel() {
 
     private var _homeState = MutableLiveData<HomeState>()
@@ -34,16 +37,15 @@ class HomeViewModel @Inject constructor(private val productRepository: ProductRe
     }
 
     fun logOut() = viewModelScope.launch {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.signOut()
-        Log.e("HomeViewModel", "User Logged Out")
+        authRepository.logOut()
+        Log.e("DetailViewModel", "User Logged Out")
     }
 
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
         if (product.isFav) {
-            productRepository.deleteFromFavorites(product)
+            productRepository.deleteFromFavorites(product, authRepository.getCurrentUserId())
         } else {
-            productRepository.addToFavorites(product)
+            productRepository.addToFavorites(product, authRepository.getCurrentUserId())
         }
         getProducts()
     }
@@ -59,5 +61,3 @@ sealed interface HomeState {
     data class EmptyScreen(val failMessage: String) : HomeState
     data class ShowSnackbar(val errorMessage: String) : HomeState
 }
-
-

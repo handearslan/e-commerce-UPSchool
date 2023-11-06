@@ -2,18 +2,21 @@ package com.handearslan.capstoneproject.ui.payment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.databinding.FragmentPaymentBinding
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PaymentFragment : Fragment(R.layout.fragment_payment) {
 
     private val binding by viewBinding(FragmentPaymentBinding::bind)
+
+    private val viewModel by viewModels<PaymentViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,44 +28,47 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
             }
 
             btnCompletePayment.setOnClickListener {
-                val addressTitle = etAddressTitle.text
-                val address = etAddress.text
-                val city = etCity.text
-                val district = etDistrict.text
-                val cardOwner = etCardOwner.text
-                val cardNumber = etCardNumber.text
-                val month = etMonth.text
-                val year = etYear.text
-                val cvc = etCvc.text
 
-                when {
-                    addressTitle.isNullOrEmpty() && address.isNullOrEmpty() && city.isNullOrEmpty() && district.isNullOrEmpty() && cardOwner.isNullOrEmpty() && cardNumber.isNullOrEmpty() && cvc.isNullOrEmpty() && month.isNullOrEmpty() && year.isNullOrEmpty() -> {
-                        Toast.makeText(
-                            requireContext(), getString(R.string.empty_blanks),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                val addressTitle = etAddressTitle.text.toString()
+                val address = etAddress.text.toString()
+                val city = etCity.text.toString()
+                val district = etDistrict.text.toString()
+                val cardOwner = etCardOwner.text.toString()
+                val cardNumber = etCardNumber.text.toString()
+                val month = etMonth.text.toString()
+                val year = etYear.text.toString()
+                val cvc = etCvc.text.toString()
+                val isValid = viewModel.checkInfo(
+                    addressTitle,
+                    address,
+                    city,
+                    district,
+                    cardOwner,
+                    cardNumber,
+                    month,
+                    year,
+                    cvc
+                )
 
-                    cardNumber?.length != 16 -> {
-                        Toast.makeText(requireContext(),getString(R.string.invalid_card_number), Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                if (isValid) {
+                    viewModel.clearCart()
+                } else {
+                    Snackbar.make(requireView(), R.string.invalid_payment , Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
+        observePayment()
+    }
 
-                    cvc?.length != 3 -> {
-                        Toast.makeText(requireContext(),getString(R.string.invalid_cvc), Toast.LENGTH_SHORT).show()
-                    }
+    private fun observePayment() {
+        viewModel.paymentState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is PaymentState.ClearCart -> {
+                    findNavController().navigate(R.id.paymentToSuccess)
+                }
 
-                    year?.length != 4 -> {
-                        Toast.makeText(requireContext(),getString(R.string.invalid_year), Toast.LENGTH_SHORT).show()
-                    }
-
-                    month?.length != 2 -> {
-                        Toast.makeText(requireContext(),getString(R.string.invalid_month), Toast.LENGTH_SHORT).show()
-                    }
-
-                    else -> {
-                        findNavController().navigate(R.id.paymentToSuccess)
-                    }
+                is PaymentState.ShowSnackbar -> {
+                    Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

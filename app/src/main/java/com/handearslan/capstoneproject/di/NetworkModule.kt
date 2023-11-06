@@ -48,5 +48,4 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideProductService(retrofit: Retrofit) = retrofit.create(ProductService::class.java)
-
 }

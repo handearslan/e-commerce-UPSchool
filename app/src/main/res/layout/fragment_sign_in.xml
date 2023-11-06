@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.signIn.SignInFragment">
 
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lav_sign_in"
         android:layout_width="240dp"
@@ -24,7 +23,7 @@
         android:id="@+id/tv_sign_in_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN IN"
+        android:text="@string/sign_in"
         android:textColor="@color/dark_pink"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -53,7 +52,9 @@
             android:fontFamily="@font/poppins"
             android:backgroundTint="@color/light_pink"
             android:drawableStart="@drawable/ic_email"
-            android:hint="email"
+            android:hint="@string/email"
+            android:lines="1"
+            android:maxLines="1"
             android:textColorHint="#855151"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="-8dp"
@@ -78,9 +79,11 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
             android:backgroundTint="@color/light_pink"
             android:drawableStart="@drawable/ic_password"
-            android:hint="password"
+            android:hint="@string/password"
             android:textColorHint="#855151"
             android:textSize="14sp" />
 
@@ -91,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textColor="@color/brown"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -105,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:text="Don't have an account?"
+        android:text="@string/don_t_have_an_account"
         android:textSize="16sp"
         android:textColor="@color/brown"
         app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
@@ -120,7 +123,7 @@
         android:backgroundTint="@color/dark_pink"
         android:padding="8dp"
         android:fontFamily="@font/poppins"
-        android:text="Sign In"
+        android:text="@string/sign_in_tv"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,6 +143,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

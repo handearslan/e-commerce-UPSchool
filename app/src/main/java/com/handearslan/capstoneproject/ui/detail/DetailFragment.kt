@@ -10,8 +10,6 @@ import com.bumptech.glide.Glide
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
@@ -28,16 +26,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel by viewModels<DetailViewModel>()
 
+    private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
     private val args by navArgs<DetailFragmentArgs>()
-
-    private lateinit var auth: FirebaseAuth
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getProductDetail(args.id)
-        auth = Firebase.auth
 
         with(binding) {
             ivBack.setOnClickListener {
@@ -90,7 +86,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
                         val cartItem = AddToCartRequest(
                             productId = args.id,
-                            userId = auth.currentUser?.uid.orEmpty()
+                            userId = firebaseAuth.currentUser?.uid.orEmpty()
                         )
                         viewModel.addToCart(cartItem)
                     }
@@ -115,4 +111,3 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.setFavoriteState(product)
     }
 }
-

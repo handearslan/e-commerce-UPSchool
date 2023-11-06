@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/cartFragment"
@@ -61,9 +61,6 @@
         <action
             android:id="@+id/homeToSearch"
             app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/homeToSignIn"
-            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -85,36 +82,6 @@
         <action
             android:id="@+id/searchToFavorites"
             app:destination="@id/favoritesFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.handearslan.capstoneproject.ui.auth.signIn.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
-        <action
-            android:id="@+id/signInToSıgnUp"
-            app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/signInToHome"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.handearslan.capstoneproject.ui.auth.signUp.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/signUpToSıgnIn"
-            app:destination="@id/signInFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.handearslan.capstoneproject.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/splashToSignIn"
-            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"

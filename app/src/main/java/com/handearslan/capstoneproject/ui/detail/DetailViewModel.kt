@@ -7,13 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.request.AddToCartRequest
 import com.handearslan.capstoneproject.data.model.response.ProductUI
+import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val productRepository: ProductRepository) :
+class DetailViewModel @Inject constructor(
+    private val productRepository: ProductRepository,
+    private val authRepository: AuthRepository
+) :
     ViewModel() {
 
     private var _detailState = MutableLiveData<DetailState>()
@@ -29,17 +33,16 @@ class DetailViewModel @Inject constructor(private val productRepository: Product
         }
     }
 
-    fun addToCart(cartItem: AddToCartRequest) {
+    fun addToCart(cartItem: AddToCartRequest) =
         viewModelScope.launch {
             productRepository.addToCart(cartItem)
         }
-    }
 
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
         if (product.isFav) {
-            productRepository.deleteFromFavorites(product)
+            productRepository.deleteFromFavorites(product, authRepository.getCurrentUserId())
         } else {
-            productRepository.addToFavorites(product)
+            productRepository.addToFavorites(product, authRepository.getCurrentUserId())
         }
         getProductDetail(product.id)
     }

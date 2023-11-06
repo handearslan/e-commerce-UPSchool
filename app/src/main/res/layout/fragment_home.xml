@@ -11,63 +11,65 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".ui.home.HomeFragment">
-
-            <TextView
-                android:id="@+id/tv_sale"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:text="Sale Products"
-                android:textColor="@color/brown"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_sale_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_sale"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_product" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginTop="6dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_products"
                 app:spanCount="2"
                 tools:itemCount="6"
+                tools:layout_editor_absoluteX="16dp"
                 tools:listitem="@layout/item_product" />
+
+            <TextView
+                android:id="@+id/tv_sale"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="@string/sale_products"
+                android:textColor="@color/brown"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ib_log_out"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ib_log_out" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sale_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ib_log_out"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_sale_product" />
 
             <TextView
                 android:id="@+id/tv_products"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_margin="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:gravity="center"
-                android:text="All Products"
+                android:text="@string/all_products"
                 android:textColor="@color/brown"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/rv_products"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_sale_product" />
@@ -102,6 +104,8 @@
                 android:id="@+id/ib_log_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
                 android:backgroundTint="@color/soft_pink"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -119,7 +123,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_products"
                 tools:visibility="visible" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

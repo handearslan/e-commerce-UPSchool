@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.data.model.response.ProductUI
-import com.handearslan.capstoneproject.databinding.ItemProductBinding
+import com.handearslan.capstoneproject.databinding.ItemSaleProductBinding
 
 class HomeSaleProductAdapter(
     private val onProductClick: (Int) -> Unit,
@@ -19,8 +19,8 @@ class HomeSaleProductAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaleProductViewHolder {
         return SaleProductViewHolder(
-            ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onProductClick,onFavClick
+            ItemSaleProductBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onProductClick, onFavClick
         )
     }
 
@@ -29,7 +29,7 @@ class HomeSaleProductAdapter(
     }
 
     class SaleProductViewHolder(
-        private val binding: ItemProductBinding,
+        private val binding: ItemSaleProductBinding,
         private val onProductClick: (Int) -> Unit,
         private val onFavClick: (ProductUI) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -49,8 +49,8 @@ class HomeSaleProductAdapter(
                 }
 
                 ivFavIcon.setBackgroundResource(
-                   if (product.isFav) R.drawable.ic_fav
-                        else R.drawable.ic_empty_fav
+                    if (product.isFav) R.drawable.ic_fav
+                    else R.drawable.ic_empty_fav
                 )
 
                 Glide.with(ivProduct).load(product.imageOne).into(ivProduct)

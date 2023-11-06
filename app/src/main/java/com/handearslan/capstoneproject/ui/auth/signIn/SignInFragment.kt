@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
@@ -19,14 +18,9 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private val binding by viewBinding(FragmentSignInBinding::bind)
     private val viewModel by viewModels<SignInViewModel>()
-    private val firebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (firebaseAuth.currentUser != null) {
-            findNavController().navigate(R.id.signInToHome)
-        }
 
         with(binding) {
             btnSignIn.setOnClickListener {
@@ -49,7 +43,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
                 SignInState.SuccessState -> {
                     pbSignIn.gone()
-                    findNavController().navigate(R.id.signInToHome)
+                    findNavController().navigate(R.id.signInToMainGraph)
                 }
 
                 is SignInState.ShowSnackbar -> {

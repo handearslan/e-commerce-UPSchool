@@ -44,7 +44,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
                 SignUpState.SuccessState -> {
                     binding.pbSignUp.gone()
-                    findNavController().navigate(R.id.signUpToSıgnIn)
+                    findNavController().navigate(R.id.signUpToMainGraph)
                 }
 
                 is SignUpState.ShowSnackbar -> {

@@ -1,5 +1,6 @@
 package com.handearslan.capstoneproject.data.repository
 
+import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.mapper.mapProductEntityToProductUI
 import com.handearslan.capstoneproject.data.mapper.mapProductToProductUI
@@ -20,14 +21,16 @@ class ProductRepository(
     private val productDao: ProductDao
 ) {
 
+    private fun getUid() = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
+
     suspend fun getProducts(): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds()
+                val favorites = productDao.getProductIds(getUid())
                 val response = productService.getProducts().body()
 
                 if (response?.status == 200) {
-                    Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites ))
+                    Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites))
                 } else {
                     Resource.Fail(response?.message.orEmpty())
                 }
@@ -39,7 +42,7 @@ class ProductRepository(
     suspend fun getProductDetail(id: Int): Resource<ProductUI> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds()
+                val favorites = productDao.getProductIds(getUid())
                 val response = productService.getProductDetail(id).body()
 
                 if (response?.status == 200 && response.product != null) {
@@ -69,7 +72,7 @@ class ProductRepository(
     suspend fun getCartProducts(userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds()
+                val favorites = productDao.getProductIds(getUid())
                 val response = productService.getCartProducts(userId).body()
 
                 if (response?.status == 200 && response.products != null) {
@@ -113,7 +116,7 @@ class ProductRepository(
     suspend fun getSearchResult(query: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds()
+                val favorites = productDao.getProductIds(getUid())
                 val response = productService.getSearchResult(query).body()
 
                 if (response?.status == 200) {
@@ -125,26 +128,26 @@ class ProductRepository(
                 Resource.Error(e.message.orEmpty())
             }
         }
-    suspend fun addToFavorites(productUI: ProductUI) {
-        productDao.addProduct(productUI.mapToProductEntity())
+
+    suspend fun addToFavorites(productUI: ProductUI, userId: String) {
+        productDao.addProduct(productUI.mapToProductEntity(userId))
     }
 
-    suspend fun deleteFromFavorites(productUI: ProductUI) {
-        productDao.deleteProduct(productUI.mapToProductEntity())
+    suspend fun deleteFromFavorites(productUI: ProductUI, userId: String) {
+        productDao.deleteProduct(productUI.mapToProductEntity(userId))
     }
 
-    suspend fun clearAllFromFavorites() {
-        productDao.clearAllFromFavorites()
+    suspend fun clearAllFromFavorites(userId: String) {
+        productDao.clearAllFromFavorites(userId)
     }
 
-
-    suspend fun getFavorites(): Resource<List<ProductUI>> =
+    suspend fun getFavorites(userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val products = productDao.getProducts()
+                val products = productDao.getProducts(userId)
 
                 if (products.isEmpty()) {
-                    Resource.Fail("Products not found")
+                    Resource.Fail("")
                 } else {
                     Resource.Success(products.mapProductEntityToProductUI())
                 }
@@ -152,6 +155,4 @@ class ProductRepository(
                 Resource.Error(e.message.orEmpty())
             }
         }
-
-
 }

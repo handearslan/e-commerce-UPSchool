@@ -3,10 +3,9 @@ package com.handearslan.capstoneproject.ui.splash
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.handearslan.capstoneproject.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,23 +13,38 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    private val splash_screen_delay: Long = 3000
+    private val viewModel: SplashViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_splash, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            openNextScreen()
-        }, splash_screen_delay)
+            viewModel.checkUserLoggedIn()
+        }, DELAY)
 
-        return view
+        observeData()
     }
 
-    private fun openNextScreen() {
+    private fun observeData() {
+        viewModel.splashState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is SplashState.UserLoggedIn -> {
+                    findNavController().navigate(R.id.splashToMainGraph)
+                }
+
+                is SplashState.UserNotLoggedIn -> {
+                    openSignInScreen()
+                }
+            }
+        }
+    }
+
+    private fun openSignInScreen() {
         val action = SplashFragmentDirections.splashToSignIn()
         findNavController().navigate(action)
+    }
+
+    companion object {
+        private const val DELAY = 3000L
     }
 }

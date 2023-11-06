@@ -16,9 +16,8 @@ fun Product.mapToProductUI(favorites: List<Int>) =
         imageOne = imageOne.orEmpty(),
         rate = rate ?: 0.0,
         count = count ?: 0,
-        isFav = favorites.contains(id)
-
-    )
+        isFav = favorites.contains(id),
+        )
 
 fun List<Product>.mapProductToProductUI(favorites: List<Int>) =
     map {
@@ -33,12 +32,11 @@ fun List<Product>.mapProductToProductUI(favorites: List<Int>) =
             count = it.count ?: 0,
             description = it.description.orEmpty(),
             category = it.category.orEmpty(),
-            isFav = favorites.contains(it.id)
-
+            isFav = favorites.contains(it.id),
         )
     }
 
-fun ProductUI.mapToProductEntity() =
+fun ProductUI.mapToProductEntity(uId: String) =
     ProductEntity(
         productId = id,
         title = title,
@@ -50,6 +48,7 @@ fun ProductUI.mapToProductEntity() =
         rate = rate,
         count = count,
         saleState = saleState,
+        userId = uId
     )
 
 fun List<ProductEntity>.mapProductEntityToProductUI() =
@@ -64,6 +63,7 @@ fun List<ProductEntity>.mapProductEntityToProductUI() =
             rate = it.rate ?: 0.0,
             count = it.count ?: 0,
             description = it.description.orEmpty(),
-            category = it.category.orEmpty()
-        )
+            category = it.category.orEmpty(),
+
+            )
     }

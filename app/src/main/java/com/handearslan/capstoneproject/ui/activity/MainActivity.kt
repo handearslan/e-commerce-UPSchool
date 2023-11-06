@@ -33,11 +33,9 @@ class MainActivity : AppCompatActivity() {
                     R.id.signInFragment, R.id.signUpFragment, R.id.detailFragment -> {
                         bottomNav.visibility = View.GONE
                     }
-
                     R.id.homeFragment, R.id.searchFragment, R.id.cartFragment, R.id.favoritesFragment -> {
                         bottomNav.visibility = View.VISIBLE
                     }
-
                     else -> {
                         bottomNav.visibility = View.GONE
                     }

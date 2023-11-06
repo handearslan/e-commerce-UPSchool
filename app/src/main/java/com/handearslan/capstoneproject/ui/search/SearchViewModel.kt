@@ -35,5 +35,3 @@ sealed interface SearchState {
     data class EmptyScreen(val failMessage: String) : SearchState
     data class ShowSnackbar(val errorMessage: String) : SearchState
 }
-
-

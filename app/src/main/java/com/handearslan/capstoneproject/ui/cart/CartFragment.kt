@@ -6,9 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
@@ -23,8 +20,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private val viewModel by viewModels<CartViewModel>()
 
-    private lateinit var auth: FirebaseAuth
-
     private val cartAdapter = CartAdapter(
         onProductClick = ::onProductClick,
         onDeleteClick = ::onDeleteClick
@@ -33,19 +28,13 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth = Firebase.auth
-
-        val userId = auth.currentUser?.uid
-
-        if (userId != null) {
-            viewModel.getCartProducts(userId)
-        }
+        viewModel.getCartProducts()
 
         with(binding) {
             rvCart.adapter = cartAdapter
 
             btnClear.setOnClickListener {
-                viewModel.clearCart(userId.toString())
+                viewModel.clearCart()
             }
             btnPayment.setOnClickListener {
                 findNavController().navigate(CartFragmentDirections.cartToPayment())
@@ -62,7 +51,6 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 is CartState.SuccessState -> {
                     pbCart.gone()
                     cartAdapter.submitList(state.product)
-
                 }
 
                 is CartState.EmptyScreen -> {
@@ -71,29 +59,26 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     ivEmpty.visible()
                     tvEmpty.visible()
                     tvEmpty.text = state.failMessage
-
                 }
 
                 is CartState.ShowSnackbar -> {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
-
                 }
 
                 is CartState.DeleteProduct -> {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.message, 500).show()
-                    viewModel.getCartProducts(auth.currentUser?.uid.toString())
+                    viewModel.getCartProducts()
                 }
 
                 is CartState.ClearCart -> {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.message, 500).show()
-                    viewModel.getCartProducts(auth.currentUser?.uid.toString())
+                    viewModel.getCartProducts()
                 }
             }
         }
-
     }
 
     private fun onProductClick(id: Int) {
@@ -104,4 +89,3 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         viewModel.onDeleteClick(id)
     }
 }
-

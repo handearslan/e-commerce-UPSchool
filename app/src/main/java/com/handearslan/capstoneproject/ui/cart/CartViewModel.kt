@@ -7,22 +7,26 @@ import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
 import com.handearslan.capstoneproject.data.model.response.ProductUI
+import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CartViewModel @Inject constructor(private val productRepository: ProductRepository) :
+class CartViewModel @Inject constructor(
+    private val productRepository: ProductRepository,
+    private val authRepository: AuthRepository
+) :
     ViewModel() {
 
     private var _cartState = MutableLiveData<CartState>()
     val cartState: LiveData<CartState> get() = _cartState
 
-    fun getCartProducts(userId: String) = viewModelScope.launch {
+    fun getCartProducts() = viewModelScope.launch {
         _cartState.value = CartState.Loading
 
-        _cartState.value = when (val result = productRepository.getCartProducts(userId)) {
+        _cartState.value = when (val result = productRepository.getCartProducts(authRepository.getCurrentUserId())) {
             is Resource.Success ->
                 if (result.data.isEmpty()) {
                     CartState.EmptyScreen("No Products")
@@ -45,11 +49,11 @@ class CartViewModel @Inject constructor(private val productRepository: ProductRe
         }
     }
 
-    fun clearCart(userId: String?) = viewModelScope.launch {
+    fun clearCart() = viewModelScope.launch {
         _cartState.value = CartState.Loading
 
         _cartState.value =
-            when (val result = productRepository.clearCart(ClearCartRequest(userId = userId))) {
+            when (val result = productRepository.clearCart(ClearCartRequest(authRepository.getCurrentUserId()))) {
                 is Resource.Success -> CartState.ClearCart("Cart cleared")
                 is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
                 is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
@@ -66,4 +70,3 @@ sealed interface CartState {
     data class EmptyScreen(val failMessage: String) : CartState
     data class ShowSnackbar(val errorMessage: String) : CartState
 }
-

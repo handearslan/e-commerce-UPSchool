@@ -6,7 +6,6 @@ import com.handearslan.capstoneproject.common.Constants.Endpoints.DELETE_FROM_CA
 import com.handearslan.capstoneproject.common.Constants.Endpoints.GET_CART_PRODUCTS
 import com.handearslan.capstoneproject.common.Constants.Endpoints.GET_PRODUCTS
 import com.handearslan.capstoneproject.common.Constants.Endpoints.GET_PRODUCT_DETAIL
-import com.handearslan.capstoneproject.common.Constants.Endpoints.GET_SALE_PRODUCTS
 import com.handearslan.capstoneproject.common.Constants.Endpoints.SEARCH_PRODUCT
 import com.handearslan.capstoneproject.data.model.request.AddToCartRequest
 import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
@@ -49,5 +48,4 @@ interface ProductService {
 
     @POST(CLEAR_CART)
     suspend fun clearCart(@Body clearCartRequest: ClearCartRequest): Response<BaseResponse>
-
 }

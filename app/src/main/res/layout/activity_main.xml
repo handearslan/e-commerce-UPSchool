@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -17,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/main_graph" />
+        app:navGraph="@navigation/login_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
@@ -33,7 +32,5 @@
         app:menu="@menu/bottom_bar_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

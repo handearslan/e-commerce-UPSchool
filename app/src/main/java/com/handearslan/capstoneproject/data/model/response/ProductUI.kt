@@ -11,5 +11,5 @@ data class ProductUI(
     val imageOne: String,
     val rate: Double,
     val count : Int,
-    val isFav: Boolean = false
+    val isFav: Boolean = false,
 )

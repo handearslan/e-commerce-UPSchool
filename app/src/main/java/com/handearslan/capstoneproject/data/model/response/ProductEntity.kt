@@ -3,13 +3,17 @@ package com.handearslan.capstoneproject.data.model.response
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.intellij.lang.annotations.Identifier
 
 @Entity(tableName = "fav_products")
 data class ProductEntity(
 
     @PrimaryKey
     @ColumnInfo(name = "productId")
-    val productId: Int?,
+    val productId: Int,
+
+    @ColumnInfo(name = "userId")
+    val userId: String,
 
     @ColumnInfo(name = "title")
     val title: String?,
