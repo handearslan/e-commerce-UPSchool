@@ -6,29 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_search"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@color/dark_pink"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/white"
+        android:text="@string/search"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tb_search"
+        app:layout_constraintTop_toTopOf="@+id/tb_search" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_search"
         tools:itemCount="3"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        tools:listitem="@layout/item_search" />
 
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:fontFamily="@font/poppins"
         android:background="@color/soft_pink"
+        android:fontFamily="@font/poppins"
         android:iconifiedByDefault="false"
         android:queryHint="Search Product"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_search" />
 
     <ProgressBar
         android:id="@+id/pb_search"

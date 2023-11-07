@@ -33,8 +33,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun addToCart(cartItem: AddToCartRequest) =
-        viewModelScope.launch {
+    fun addToCart(cartItem: AddToCartRequest) = viewModelScope.launch {
             productRepository.addToCart(cartItem)
         }
 

@@ -6,17 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorites.FavoritesFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_favorites"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@color/dark_pink"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto"
+        android:text="@string/favorites"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_favorites"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tb_favorites"
+        app:layout_constraintTop_toTopOf="@+id/tb_favorites" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fav"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/btn_clear_fav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_favorites"
         app:spanCount="1"
         tools:itemCount="4"
         tools:listitem="@layout/item_fav" />

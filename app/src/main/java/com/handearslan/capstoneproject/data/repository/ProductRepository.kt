@@ -69,6 +69,8 @@ class ProductRepository(
             }
         }
 
+
+
     suspend fun getCartProducts(userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
@@ -76,7 +78,7 @@ class ProductRepository(
                 val response = productService.getCartProducts(userId).body()
 
                 if (response?.status == 200 && response.products != null) {
-                    Resource.Success(response.products.orEmpty().mapProductToProductUI(favorites))
+                    Resource.Success(response.products.mapProductToProductUI(favorites))
                 } else {
                     Resource.Fail(response?.message.orEmpty())
                 }

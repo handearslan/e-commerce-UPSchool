@@ -11,20 +11,44 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="6dp">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.home.HomeFragment">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_home"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:background="@color/dark_pink"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_app_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/pureglow"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tb_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tb_home"
+                app:layout_constraintTop_toTopOf="@+id/tb_home" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/tv_products"
                 app:spanCount="2"
@@ -36,25 +60,27 @@
                 android:id="@+id/tv_sale"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:text="@string/sale_products"
                 android:textColor="@color/brown"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/ib_log_out"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/rv_sale_product"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ib_log_out" />
+                app:layout_constraintTop_toBottomOf="@+id/tb_home" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sale_product"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ib_log_out"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sale"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_sale_product" />
 
@@ -62,15 +88,15 @@
                 android:id="@+id/tv_products"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:gravity="center"
                 android:text="@string/all_products"
                 android:textColor="@color/brown"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/rv_products"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_sale_product" />
 
@@ -104,8 +130,8 @@
                 android:id="@+id/ib_log_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/soft_pink"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
