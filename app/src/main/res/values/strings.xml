@@ -12,7 +12,7 @@
     <string name="empty_email">Email is empty</string>
     <string name="quantity">Quantity</string>
     <string name="all_products">All Products</string>
-    <string name="sale_products">Sale Products</string>
+    <string name="sale_products">Discounted Products</string>
     <string name="cvc">CVC</string>
     <string name="address_information">Address Information</string>
     <string name="city">City</string>
