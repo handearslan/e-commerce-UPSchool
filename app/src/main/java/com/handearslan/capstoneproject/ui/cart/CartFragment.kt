@@ -39,6 +39,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             btnPayment.setOnClickListener {
                 findNavController().navigate(CartFragmentDirections.cartToPayment())
             }
+
         }
         observeData()
     }
@@ -76,6 +77,22 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     pbCart.gone()
                     Snackbar.make(requireView(), state.message, 500).show()
                     viewModel.getCartProducts()
+                }
+            }
+        }
+        viewModel.cartState.observe(viewLifecycleOwner) { state ->
+            if (state is CartState.SuccessState) {
+                viewModel.calculateTotalPrice(state.product)
+            }
+
+            viewModel.totalPrice.observe(viewLifecycleOwner) { totalPrice ->
+                tvTotalAmount.text = if (totalPrice > 0) {
+                    String.format(
+                        tvTotalAmount.context.getString(R.string.product_price),
+                        totalPrice
+                    )
+                } else {
+                    tvTotalAmount.context.getString(R.string.zero_price)
                 }
             }
         }

@@ -69,8 +69,6 @@ class ProductRepository(
             }
         }
 
-
-
     suspend fun getCartProducts(userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
@@ -104,7 +102,7 @@ class ProductRepository(
     suspend fun onDeleteClick(id: Int): Resource<BaseResponse> =
         withContext(Dispatchers.IO) {
             try {
-                val response = productService.deleteFromCart(DeleteFromCartRequest(id)).body()
+                val response = productService.deleteFromCart(DeleteFromCartRequest(getUid(), id)).body()
                 if (response?.status == 200) {
                     Resource.Success(response)
                 } else {

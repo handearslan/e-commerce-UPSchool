@@ -25,7 +25,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/roboto"
         android:text="@string/favorites"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/tb_favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tb_favorites"

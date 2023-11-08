@@ -1,6 +1,5 @@
 package com.handearslan.capstoneproject.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,7 +37,6 @@ class HomeViewModel @Inject constructor(
 
     fun logOut() = viewModelScope.launch {
         authRepository.logOut()
-        Log.e("DetailViewModel", "User Logged Out")
     }
 
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {

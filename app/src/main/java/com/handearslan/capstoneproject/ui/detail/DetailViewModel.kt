@@ -34,8 +34,8 @@ class DetailViewModel @Inject constructor(
     }
 
     fun addToCart(cartItem: AddToCartRequest) = viewModelScope.launch {
-            productRepository.addToCart(cartItem)
-        }
+        productRepository.addToCart(cartItem)
+    }
 
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
         if (product.isFav) {
@@ -45,6 +45,7 @@ class DetailViewModel @Inject constructor(
         }
         getProductDetail(product.id)
     }
+
 }
 
 sealed interface DetailState {

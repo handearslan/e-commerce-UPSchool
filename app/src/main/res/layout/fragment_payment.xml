@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp">
+    android:layout_margin="12dp"
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/tv_card_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/card_information"
+        android:background="@drawable/bg_payment"
         android:textColor="@color/brown"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/iv_back_payment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_back_payment"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="@+id/iv_back_payment" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_card_owner"
@@ -26,6 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:padding="8dp"
+        android:lines="1"
+        android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/til_card_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_card_owner"
         app:layout_constraintVertical_bias="0.5"
-        app:startIconDrawable="@drawable/ic_credit_card">
+        app:startIconDrawable="@drawable/ic_card_new">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_card_number"
@@ -173,6 +177,7 @@
         android:layout_width="300dp"
         android:layout_height="32dp"
         android:text="@string/address_information"
+        android:background="@drawable/bg_payment"
         android:textAlignment="center"
         android:textColor="@color/brown"
         android:textSize="20sp"
@@ -315,35 +320,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_empty"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/tv_empty"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_empty" />
-
-    <TextView
-        android:id="@+id/tv_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/poppins"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_empty" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/pb_detail"

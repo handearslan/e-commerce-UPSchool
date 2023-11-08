@@ -71,9 +71,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
         }
-
-
     }
+
     private fun onProductClick(id: Int) {
         findNavController().navigate(SearchFragmentDirections.searchToDetail(id))
     }

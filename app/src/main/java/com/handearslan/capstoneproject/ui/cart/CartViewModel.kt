@@ -23,6 +23,13 @@ class CartViewModel @Inject constructor(
     private var _cartState = MutableLiveData<CartState>()
     val cartState: LiveData<CartState> get() = _cartState
 
+    private var _totalPrice = MutableLiveData<Double>()
+    val totalPrice: LiveData<Double> get() = _totalPrice
+
+    init {
+        _totalPrice.value = 0.00
+    }
+
     fun getCartProducts() = viewModelScope.launch {
         _cartState.value = CartState.Loading
 
@@ -54,13 +61,31 @@ class CartViewModel @Inject constructor(
 
         _cartState.value =
             when (val result = productRepository.clearCart(ClearCartRequest(authRepository.getCurrentUserId()))) {
-                is Resource.Success -> CartState.ClearCart("Cart cleared")
+                is Resource.Success -> {
+                    _totalPrice.value = 0.00
+                    CartState.ClearCart("Cart cleared")
+                }
                 is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
                 is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
             }
     }
-}
 
+    fun calculateTotalPrice(products: List<ProductUI>) {
+        val totalPrice = products.map { product ->
+            val price = if (product.salePrice > 0.0) {
+                product.salePrice
+            } else {
+                product.price
+            }
+            price
+        }.sum()
+        _totalPrice.value = totalPrice
+
+        if (totalPrice == 0.0) {
+            _totalPrice.value = 0.00
+        }
+    }
+}
 
 sealed interface CartState {
     object Loading : CartState
