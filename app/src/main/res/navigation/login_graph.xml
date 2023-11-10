@@ -12,10 +12,14 @@
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/signInToSıgnUp"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/signInToMainGraph"
-            app:destination="@id/main_graph" />
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -24,10 +28,14 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/signUpToSıgnIn"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/signUpToMainGraph"
-            app:destination="@id/main_graph" />
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -36,10 +44,14 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/splashToSignIn"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/splashToMainGraph"
-            app:destination="@id/main_graph" />
+            app:destination="@id/main_graph"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <include app:graph="@navigation/main_graph" />
 </navigation>

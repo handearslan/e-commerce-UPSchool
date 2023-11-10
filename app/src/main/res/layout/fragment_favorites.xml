@@ -21,11 +21,11 @@
         android:id="@+id/tv_app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:fontFamily="@font/roboto"
         android:text="@string/favorites"
-        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tb_favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tb_favorites"
@@ -37,9 +37,9 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="25dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/btn_clear_fav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_favorites"
@@ -47,18 +47,19 @@
         tools:itemCount="4"
         tools:listitem="@layout/item_fav" />
 
-    <Button
-        android:id="@+id/btn_clear_fav"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tv_clear_fav"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/dark_pink"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/bg_clear"
         android:fontFamily="@font/poppins"
-        android:text="ALL CLEAR"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="2dp"
+        android:text="Clear"
+        android:textColor="@color/dark_pink"
+        app:layout_constraintBottom_toBottomOf="@+id/tb_favorites"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_empty"

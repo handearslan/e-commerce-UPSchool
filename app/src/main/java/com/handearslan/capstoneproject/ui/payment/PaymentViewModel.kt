@@ -16,15 +16,14 @@ import javax.inject.Inject
 class PaymentViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val authRepository: AuthRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private var _paymentState = MutableLiveData<PaymentState>()
     val paymentState: LiveData<PaymentState> get() = _paymentState
 
 
     fun clearCart() = viewModelScope.launch {
-        val result = productRepository.clearCart(ClearCartRequest(authRepository.getCurrentUserId()))
+        val result = productRepository.clearCart(authRepository.getCurrentUserId())
         _paymentState.value = when (result) {
             is Resource.Success -> PaymentState.ClearCart("Success")
             else -> PaymentState.ShowSnackbar("Failed")

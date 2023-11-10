@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
-import com.handearslan.capstoneproject.data.model.request.AddToCartRequest
 import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
@@ -17,35 +16,47 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val authRepository: AuthRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private var _detailState = MutableLiveData<DetailState>()
     val detailState: LiveData<DetailState> get() = _detailState
 
+    private var product: ProductUI? = null
+
     fun getProductDetail(id: Int) = viewModelScope.launch {
         _detailState.value = DetailState.Loading
 
-        _detailState.value = when (val result = productRepository.getProductDetail(id)) {
-            is Resource.Success -> DetailState.SuccessState(result.data)
+        _detailState.value = when (val result =
+            productRepository.getProductDetail(id, authRepository.getCurrentUserId())) {
+            is Resource.Success -> {
+                product = result.data
+                DetailState.SuccessState(result.data)
+            }
+
             is Resource.Fail -> DetailState.EmptyScreen(result.failMessage)
             is Resource.Error -> DetailState.ShowSnackbar(result.errorMessage)
         }
     }
 
-    fun addToCart(cartItem: AddToCartRequest) = viewModelScope.launch {
-        productRepository.addToCart(cartItem)
+    fun addToCart(id: Int) = viewModelScope.launch {
+        _detailState.value =
+            when (val result = productRepository.addToCart(id, authRepository.getCurrentUserId())) {
+                is Resource.Success -> DetailState.ShowSnackbar(result.data.message.orEmpty())
+                is Resource.Fail -> DetailState.ShowSnackbar(result.failMessage)
+                is Resource.Error -> DetailState.ShowSnackbar(result.errorMessage)
+            }
     }
 
-    fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
-        if (product.isFav) {
-            productRepository.deleteFromFavorites(product, authRepository.getCurrentUserId())
-        } else {
-            productRepository.addToFavorites(product, authRepository.getCurrentUserId())
+    fun setFavoriteState() = viewModelScope.launch {
+        product?.let { product ->
+            if (product.isFav) {
+                productRepository.deleteFromFavorites(product, authRepository.getCurrentUserId())
+            } else {
+                productRepository.addToFavorites(product, authRepository.getCurrentUserId())
+            }
+            getProductDetail(product.id)
         }
-        getProductDetail(product.id)
     }
-
 }
 
 sealed interface DetailState {

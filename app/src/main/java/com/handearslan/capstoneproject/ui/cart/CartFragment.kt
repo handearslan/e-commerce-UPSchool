@@ -33,8 +33,9 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         with(binding) {
             rvCart.adapter = cartAdapter
 
-            btnClear.setOnClickListener {
+            tvClear.setOnClickListener {
                 viewModel.clearCart()
+
             }
             btnPayment.setOnClickListener {
                 findNavController().navigate(CartFragmentDirections.cartToPayment())
@@ -52,6 +53,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 is CartState.SuccessState -> {
                     pbCart.gone()
                     cartAdapter.submitList(state.product)
+
+                    tvTotalAmount.visible()
+                    tvTotalPrice.visible()
+                    viewModel.calculateTotalPrice(state.product)
                 }
 
                 is CartState.EmptyScreen -> {
@@ -59,6 +64,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                     rvCart.gone()
                     ivEmpty.visible()
                     tvEmpty.visible()
+                    tvTotalAmount.gone()
+                    tvTotalPrice.gone()
+                    cardView.gone()
+                    btnPayment.gone()
                     tvEmpty.text = state.failMessage
                 }
 
@@ -80,20 +89,15 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 }
             }
         }
-        viewModel.cartState.observe(viewLifecycleOwner) { state ->
-            if (state is CartState.SuccessState) {
-                viewModel.calculateTotalPrice(state.product)
-            }
-
-            viewModel.totalPrice.observe(viewLifecycleOwner) { totalPrice ->
-                tvTotalAmount.text = if (totalPrice > 0) {
-                    String.format(
-                        tvTotalAmount.context.getString(R.string.product_price),
-                        totalPrice
-                    )
-                } else {
-                    tvTotalAmount.context.getString(R.string.zero_price)
-                }
+        viewModel.totalPrice.observe(viewLifecycleOwner)
+        { totalPrice ->
+            tvTotalAmount.text = if (totalPrice > 0) {
+                String.format(
+                    tvTotalAmount.context.getString(R.string.product_price),
+                    totalPrice
+                )
+            } else {
+                tvTotalAmount.context.getString(R.string.zero_price)
             }
         }
     }

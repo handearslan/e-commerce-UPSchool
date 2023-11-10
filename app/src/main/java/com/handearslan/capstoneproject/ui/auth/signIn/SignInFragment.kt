@@ -17,12 +17,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private val binding by viewBinding(FragmentSignInBinding::bind)
+
     private val viewModel by viewModels<SignInViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+
             btnSignIn.setOnClickListener {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()

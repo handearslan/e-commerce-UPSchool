@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
-import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
 import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
@@ -17,8 +16,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val authRepository: AuthRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private var _cartState = MutableLiveData<CartState>()
     val cartState: LiveData<CartState> get() = _cartState
@@ -26,21 +24,12 @@ class CartViewModel @Inject constructor(
     private var _totalPrice = MutableLiveData<Double>()
     val totalPrice: LiveData<Double> get() = _totalPrice
 
-    init {
-        _totalPrice.value = 0.00
-    }
-
     fun getCartProducts() = viewModelScope.launch {
         _cartState.value = CartState.Loading
 
-        _cartState.value = when (val result = productRepository.getCartProducts(authRepository.getCurrentUserId())) {
-            is Resource.Success ->
-                if (result.data.isEmpty()) {
-                    CartState.EmptyScreen("No Products")
-                } else {
-                    CartState.SuccessState(result.data)
-                }
-
+        _cartState.value = when (val result =
+            productRepository.getCartProducts(authRepository.getCurrentUserId())) {
+            is Resource.Success -> CartState.SuccessState(result.data)
             is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
             is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
         }
@@ -49,8 +38,9 @@ class CartViewModel @Inject constructor(
     fun onDeleteClick(id: Int) = viewModelScope.launch {
         _cartState.value = CartState.Loading
 
-        _cartState.value = when (val result = productRepository.onDeleteClick(id)) {
-            is Resource.Success -> CartState.DeleteProduct("Product deleted")
+        _cartState.value = when (val result =
+            productRepository.onDeleteClick(id, authRepository.getCurrentUserId())) {
+            is Resource.Success -> CartState.DeleteProduct(result.data.message.orEmpty())
             is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
             is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
         }
@@ -60,11 +50,8 @@ class CartViewModel @Inject constructor(
         _cartState.value = CartState.Loading
 
         _cartState.value =
-            when (val result = productRepository.clearCart(ClearCartRequest(authRepository.getCurrentUserId()))) {
-                is Resource.Success -> {
-                    _totalPrice.value = 0.00
-                    CartState.ClearCart("Cart cleared")
-                }
+            when (val result = productRepository.clearCart(authRepository.getCurrentUserId())) {
+                is Resource.Success -> CartState.ClearCart(result.data.message.orEmpty())
                 is Resource.Fail -> CartState.EmptyScreen(result.failMessage)
                 is Resource.Error -> CartState.ShowSnackbar(result.errorMessage)
             }
@@ -80,10 +67,6 @@ class CartViewModel @Inject constructor(
             price
         }.sum()
         _totalPrice.value = totalPrice
-
-        if (totalPrice == 0.0) {
-            _totalPrice.value = 0.00
-        }
     }
 }
 

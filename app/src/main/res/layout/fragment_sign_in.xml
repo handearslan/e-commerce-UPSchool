@@ -23,9 +23,10 @@
         android:id="@+id/tv_sign_in_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppinsbold"
         android:text="@string/sign_in"
         android:textColor="@color/dark_pink"
-        android:textSize="25dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/til_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,21 +38,21 @@
         android:id="@+id/til_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8sp"
+        android:layout_margin="8dp"
         app:boxBackgroundColor="@color/light_pink"
         app:layout_constraintBottom_toTopOf="@+id/til_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sign_in_title"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintTop_toBottomOf="@+id/tv_sign_in_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
             android:backgroundTint="@color/light_pink"
             android:drawableStart="@drawable/ic_email"
+            android:fontFamily="@font/poppins"
+            android:inputType="textEmailAddress"
             android:hint="@string/email"
             android:lines="1"
             android:maxLines="1"
@@ -65,25 +66,23 @@
         android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8sp"
+        android:layout_margin="8dp"
         app:boxBackgroundColor="@color/light_pink"
-        app:layout_constraintBottom_toTopOf="@+id/tv_sign_in_up"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_email"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintTop_toBottomOf="@+id/til_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_pink"
+            android:drawableStart="@drawable/ic_password"
             android:fontFamily="@font/poppins"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:lines="1"
             android:maxLines="1"
-            android:backgroundTint="@color/light_pink"
-            android:drawableStart="@drawable/ic_password"
-            android:hint="@string/password"
             android:textColorHint="#855151"
             android:textSize="14sp" />
 
@@ -93,43 +92,43 @@
         android:id="@+id/tv_sign_in_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/sign_up"
+        android:fontFamily="@font/poppinsbold"
         android:textColor="@color/brown"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
-        app:layout_constraintEnd_toEndOf="@+id/til_password"
-        app:layout_constraintTop_toBottomOf="@+id/til_password"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_account" />
 
     <TextView
         android:id="@+id/tv_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
         android:text="@string/don_t_have_an_account"
-        android:textSize="16sp"
         android:textColor="@color/brown"
-        app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
-        app:layout_constraintEnd_toStartOf="@+id/tv_sign_in_up"
-        app:layout_constraintTop_toBottomOf="@+id/til_password"
-        app:layout_constraintVertical_bias="0.5" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_sign_in_up" />
 
     <Button
         android:id="@+id/btn_sign_in"
         android:layout_width="0dp"
         android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="25dp"
         android:backgroundTint="@color/dark_pink"
-        android:padding="8dp"
         android:fontFamily="@font/poppins"
+        android:padding="8dp"
         android:text="@string/sign_in_tv"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_account"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sign_in_up"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/pb_sign_in"

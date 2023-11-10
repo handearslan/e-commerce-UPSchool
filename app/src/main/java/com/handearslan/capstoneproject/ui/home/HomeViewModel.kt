@@ -16,8 +16,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val authRepository: AuthRepository
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private var _homeState = MutableLiveData<HomeState>()
     val homeState: LiveData<HomeState> get() = _homeState
@@ -25,18 +24,20 @@ class HomeViewModel @Inject constructor(
     fun getProducts() = viewModelScope.launch {
         _homeState.value = HomeState.Loading
 
-        _homeState.value = when (val result = productRepository.getProducts()) {
-            is Resource.Success -> HomeState.SuccessState(
-                result.data,
-                result.data.filter { it.saleState == true })
+        _homeState.value =
+            when (val result = productRepository.getProducts(authRepository.getCurrentUserId())) {
+                is Resource.Success -> HomeState.SuccessState(
+                    result.data,
+                    result.data.filter { it.saleState == true })
 
-            is Resource.Fail -> HomeState.EmptyScreen(result.failMessage)
-            is Resource.Error -> HomeState.ShowSnackbar(result.errorMessage)
-        }
+                is Resource.Fail -> HomeState.EmptyScreen(result.failMessage)
+                is Resource.Error -> HomeState.ShowSnackbar(result.errorMessage)
+            }
     }
 
     fun logOut() = viewModelScope.launch {
         authRepository.logOut()
+
     }
 
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {

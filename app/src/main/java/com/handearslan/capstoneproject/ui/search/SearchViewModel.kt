@@ -6,14 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.model.response.ProductUI
+import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(private val productRepository: ProductRepository) :
-    ViewModel() {
+class SearchViewModel @Inject constructor(
+    private val productRepository: ProductRepository,
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
     private var _searchState = MutableLiveData<SearchState>()
     val searchState: LiveData<SearchState> get() = _searchState
@@ -21,7 +24,8 @@ class SearchViewModel @Inject constructor(private val productRepository: Product
     fun getSearchResult(query: String) = viewModelScope.launch {
         _searchState.value = SearchState.Loading
 
-        _searchState.value = when (val result = productRepository.getSearchResult(query)) {
+        _searchState.value = when (val result =
+            productRepository.getSearchResult(query, authRepository.getCurrentUserId())) {
             is Resource.Success -> SearchState.SuccessState(result.data)
             is Resource.Fail -> SearchState.EmptyScreen(result.failMessage)
             is Resource.Error -> SearchState.ShowSnackbar(result.errorMessage)

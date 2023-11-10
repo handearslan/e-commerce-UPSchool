@@ -4,30 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
-    android:padding="2dp">
+    android:layout_margin="12dp">
 
     <TextView
         android:id="@+id/tv_card_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/card_information"
         android:background="@drawable/bg_payment"
+        android:padding="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/card_information"
         android:textColor="@color/brown"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_back_payment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_back_payment" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_card_owner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_marginTop="5dp"
-        android:padding="8dp"
         android:lines="1"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/til_card_number"
@@ -43,6 +42,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/poppins"
             android:hint="@string/card_owner"
+            android:inputType="text"
             android:lines="1"
             android:maxLines="1"
             android:textAlignment="gravity"
@@ -56,7 +56,7 @@
         android:id="@+id/til_card_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/til_cvc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,12 +88,11 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/month"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_address_info"
+        app:layout_constraintBottom_toBottomOf="@+id/til_year"
         app:layout_constraintEnd_toStartOf="@+id/til_year"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_card_number"
+        app:layout_constraintTop_toTopOf="@+id/til_year"
         app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -116,14 +115,14 @@
         android:id="@+id/til_year"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/year"
-        android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_address_info"
         app:layout_constraintEnd_toStartOf="@+id/til_cvc"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/til_month"
-        app:layout_constraintTop_toBottomOf="@+id/til_card_number"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintTop_toBottomOf="@+id/til_card_number">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_year"
@@ -148,12 +147,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="25dp"
         android:hint="@string/cvc"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_address_info"
+        app:layout_constraintBottom_toBottomOf="@+id/til_year"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/til_year"
-        app:layout_constraintTop_toBottomOf="@+id/til_card_number"
+        app:layout_constraintTop_toTopOf="@+id/til_year"
         app:layout_constraintVertical_bias="0.5">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -174,26 +172,26 @@
 
     <TextView
         android:id="@+id/tv_address_info"
-        android:layout_width="300dp"
-        android:layout_height="32dp"
-        android:text="@string/address_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/bg_payment"
+        android:padding="4dp"
+        android:layout_marginVertical="4dp"
+        android:text="@string/address_information"
         android:textAlignment="center"
         android:textColor="@color/brown"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/til_city"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_cvc"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/til_cvc" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_city"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/til_district"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +205,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/poppins"
             android:hint="@string/city"
-            android:lines="1"
+            android:inputType="text"
             android:maxLines="1"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
@@ -220,7 +218,7 @@
         android:id="@+id/til_district"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/til_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -234,6 +232,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:hint="@string/district"
+            android:inputType="text"
             android:lines="1"
             android:maxLines="1"
             android:paddingStart="8dp"
@@ -249,7 +248,7 @@
         android:id="@+id/til_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/til_address_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -263,6 +262,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:hint="@string/address"
+            android:inputType="text"
             android:lines="1"
             android:maxLines="1"
             android:paddingStart="8dp"
@@ -278,7 +278,7 @@
         android:id="@+id/til_address_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_complete_payment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -292,6 +292,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:hint="@string/address_title"
+            android:inputType="text"
             android:lines="1"
             android:maxLines="1"
             android:paddingStart="8dp"
@@ -305,6 +306,9 @@
         android:id="@+id/btn_complete_payment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="@color/dark_pink"
         android:fontFamily="@font/poppins"
         android:text="@string/complete_payment"
@@ -319,8 +323,11 @@
         android:id="@+id/iv_back_payment"
         android:layout_width="28dp"
         android:layout_height="28dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_card_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_card_info" />
 
     <ProgressBar
         android:id="@+id/pb_detail"

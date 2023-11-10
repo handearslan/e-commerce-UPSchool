@@ -36,12 +36,13 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_up_in">Sign Up</string>
     <string name="nice_to_see_you">Nice to see you!</string>
-    <string name="pureglow">PUREGLOW</string>
+    <string name="pure_glow">PUREGLOW</string>
     <string name="continue_shopping">Continue Shopping</string>
     <string name="favorites">Favorites</string>
     <string name="cart">Cart</string>
     <string name="search">Search</string>
-    <string name="product_price">%s</string>
+    <string name="product_price">%s ₺</string>
     <string name="zero_price">0.00</string>
+    <string name="total_price">Total Price</string>
 
 </resources>

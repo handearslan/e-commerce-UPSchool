@@ -6,10 +6,10 @@ import com.handearslan.capstoneproject.data.mapper.mapProductEntityToProductUI
 import com.handearslan.capstoneproject.data.mapper.mapProductToProductUI
 import com.handearslan.capstoneproject.data.mapper.mapToProductEntity
 import com.handearslan.capstoneproject.data.mapper.mapToProductUI
-import com.handearslan.capstoneproject.data.model.response.BaseResponse
 import com.handearslan.capstoneproject.data.model.request.AddToCartRequest
 import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
 import com.handearslan.capstoneproject.data.model.request.DeleteFromCartRequest
+import com.handearslan.capstoneproject.data.model.response.BaseResponse
 import com.handearslan.capstoneproject.data.model.response.ProductUI
 import com.handearslan.capstoneproject.data.source.local.ProductDao
 import com.handearslan.capstoneproject.data.source.remote.ProductService
@@ -21,12 +21,10 @@ class ProductRepository(
     private val productDao: ProductDao
 ) {
 
-    private fun getUid() = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
-
-    suspend fun getProducts(): Resource<List<ProductUI>> =
+    suspend fun getProducts(userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds(getUid())
+                val favorites = productDao.getProductIds(userId)
                 val response = productService.getProducts().body()
 
                 if (response?.status == 200) {
@@ -39,10 +37,10 @@ class ProductRepository(
             }
         }
 
-    suspend fun getProductDetail(id: Int): Resource<ProductUI> =
+    suspend fun getProductDetail(id: Int, userId: String): Resource<ProductUI> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds(getUid())
+                val favorites = productDao.getProductIds(userId)
                 val response = productService.getProductDetail(id).body()
 
                 if (response?.status == 200 && response.product != null) {
@@ -55,10 +53,10 @@ class ProductRepository(
             }
         }
 
-    suspend fun addToCart(addToCartRequest: AddToCartRequest): Resource<BaseResponse> =
+    suspend fun addToCart(id: Int, userId: String): Resource<BaseResponse> =
         withContext(Dispatchers.IO) {
             try {
-                val response = productService.addToCart(addToCartRequest).body()
+                val response = productService.addToCart(AddToCartRequest(id, userId)).body()
                 if (response?.status == 200) {
                     Resource.Success(response)
                 } else {
@@ -72,7 +70,7 @@ class ProductRepository(
     suspend fun getCartProducts(userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds(getUid())
+                val favorites = productDao.getProductIds(userId)
                 val response = productService.getCartProducts(userId).body()
 
                 if (response?.status == 200 && response.products != null) {
@@ -85,10 +83,10 @@ class ProductRepository(
             }
         }
 
-    suspend fun clearCart(clearCartRequest: ClearCartRequest): Resource<BaseResponse> =
+    suspend fun clearCart(userId: String): Resource<BaseResponse> =
         withContext(Dispatchers.IO) {
             try {
-                val response = productService.clearCart(clearCartRequest).body()
+                val response = productService.clearCart(ClearCartRequest(userId)).body()
                 if (response?.status == 200) {
                     Resource.Success(response)
                 } else {
@@ -99,10 +97,10 @@ class ProductRepository(
             }
         }
 
-    suspend fun onDeleteClick(id: Int): Resource<BaseResponse> =
+    suspend fun onDeleteClick(id: Int, userId: String): Resource<BaseResponse> =
         withContext(Dispatchers.IO) {
             try {
-                val response = productService.deleteFromCart(DeleteFromCartRequest(getUid(), id)).body()
+                val response = productService.deleteFromCart(DeleteFromCartRequest(userId, id)).body()
                 if (response?.status == 200) {
                     Resource.Success(response)
                 } else {
@@ -113,10 +111,10 @@ class ProductRepository(
             }
         }
 
-    suspend fun getSearchResult(query: String): Resource<List<ProductUI>> =
+    suspend fun getSearchResult(query: String, userId: String): Resource<List<ProductUI>> =
         withContext(Dispatchers.IO) {
             try {
-                val favorites = productDao.getProductIds(getUid())
+                val favorites = productDao.getProductIds(userId)
                 val response = productService.getSearchResult(query).body()
 
                 if (response?.status == 200) {

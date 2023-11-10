@@ -31,7 +31,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         with(binding) {
             rvFav.adapter = favoritesAdapter
 
-            btnClearFav.setOnClickListener {
+            tvClearFav.setOnClickListener {
                 viewModel.clearAllFromFavorites()
             }
         }

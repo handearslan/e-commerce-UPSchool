@@ -33,15 +33,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                 }
 
                 is SplashState.UserNotLoggedIn -> {
-                    openSignInScreen()
+                    findNavController().navigate(R.id.splashToSignIn)
                 }
             }
         }
-    }
-
-    private fun openSignInScreen() {
-        val action = SplashFragmentDirections.splashToSignIn()
-        findNavController().navigate(action)
     }
 
     companion object {

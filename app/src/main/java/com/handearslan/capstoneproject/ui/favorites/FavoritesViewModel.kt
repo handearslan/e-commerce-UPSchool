@@ -24,11 +24,12 @@ class FavoritesViewModel @Inject constructor(
     fun getFavorites() = viewModelScope.launch {
         _favoritesState.value = FavoritesState.Loading
 
-        _favoritesState.value = when (val result = productRepository.getFavorites(authRepository.getCurrentUserId())) {
-            is Resource.Success -> FavoritesState.SuccessState(result.data)
-            is Resource.Fail -> FavoritesState.EmptyScreen
-            is Resource.Error -> FavoritesState.ShowSnackbar(result.errorMessage)
-        }
+        _favoritesState.value =
+            when (val result = productRepository.getFavorites(authRepository.getCurrentUserId())) {
+                is Resource.Success -> FavoritesState.SuccessState(result.data)
+                is Resource.Fail -> FavoritesState.EmptyScreen
+                is Resource.Error -> FavoritesState.ShowSnackbar(result.errorMessage)
+            }
     }
 
     fun deleteFromFavorites(product: ProductUI) {

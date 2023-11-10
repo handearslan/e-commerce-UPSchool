@@ -16,9 +16,6 @@
         <action
             android:id="@+id/cartToDetail"
             app:destination="@id/detailFragment" />
-        <action
-            android:id="@+id/cartToSelf"
-            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -41,14 +38,8 @@
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
-            android:id="@+id/favoritesToCart"
-            app:destination="@id/cartFragment" />
-        <action
             android:id="@+id/favoritesToDetail"
             app:destination="@id/detailFragment" />
-        <action
-            android:id="@+id/favToSelf"
-            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -58,9 +49,6 @@
         <action
             android:id="@+id/homeToDetail"
             app:destination="@id/detailFragment" />
-        <action
-            android:id="@+id/homeToSearch"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -69,7 +57,9 @@
         tools:layout="@layout/fragment_payment" >
         <action
             android:id="@+id/paymentToSuccess"
-            app:destination="@id/successFragment" />
+            app:destination="@id/successFragment"
+            app:popUpTo="@id/paymentFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -79,9 +69,6 @@
         <action
             android:id="@+id/searchToDetail"
             app:destination="@id/detailFragment" />
-        <action
-            android:id="@+id/searchToFavorites"
-            app:destination="@id/favoritesFragment" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"

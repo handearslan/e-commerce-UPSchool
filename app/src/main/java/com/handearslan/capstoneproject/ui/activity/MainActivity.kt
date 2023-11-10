@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.handearslan.capstoneproject.MainApplication
 import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.databinding.ActivityMainBinding

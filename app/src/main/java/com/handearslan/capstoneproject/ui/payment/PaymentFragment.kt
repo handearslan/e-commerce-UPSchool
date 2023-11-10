@@ -28,7 +28,6 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
             }
 
             btnCompletePayment.setOnClickListener {
-
                 val addressTitle = etAddressTitle.text.toString()
                 val address = etAddress.text.toString()
                 val city = etCity.text.toString()
@@ -53,7 +52,8 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
                 if (isValid) {
                     viewModel.clearCart()
                 } else {
-                    Snackbar.make(requireView(), R.string.invalid_payment , Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), R.string.invalid_payment, Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
