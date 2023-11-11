@@ -1,6 +1,5 @@
 package com.handearslan.capstoneproject.ui.auth.signIn
 
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,8 +29,8 @@ class SignInViewModel @Inject constructor(private val authRepository: AuthReposi
 
     fun checkInfo(email: String, password: String) {
         when {
-            Patterns.EMAIL_ADDRESS.matcher(email).matches().not() -> {
-                _signInState.value = SignInState.ShowSnackbar("Invalid email")
+            email.isEmpty() ->  {
+                _signInState.value = SignInState.ShowSnackbar("Email can not be empty")
             }
 
             password.isEmpty() -> {

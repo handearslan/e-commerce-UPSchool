@@ -236,10 +236,8 @@
         android:layout_marginHorizontal="8dp"
         android:background="@color/soft_pink"
         android:elevation="0dp"
-        android:paddingStart="4dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="4dp"
-        android:paddingBottom="20dp"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/scrollView"
         app:layout_constraintStart_toStartOf="@+id/scrollView">
