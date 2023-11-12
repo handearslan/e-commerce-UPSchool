@@ -53,7 +53,7 @@
         android:background="@color/soft_pink"
         android:fontFamily="@font/poppins"
         android:iconifiedByDefault="false"
-        android:queryHint="Search Product"
+        android:queryHint="Enter the product name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

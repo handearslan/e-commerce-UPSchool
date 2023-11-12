@@ -35,11 +35,6 @@ class HomeViewModel @Inject constructor(
             }
     }
 
-    fun logOut() = viewModelScope.launch {
-        authRepository.logOut()
-
-    }
-
     fun setFavoriteState(product: ProductUI) = viewModelScope.launch {
         if (product.isFav) {
             productRepository.deleteFromFavorites(product, authRepository.getCurrentUserId())

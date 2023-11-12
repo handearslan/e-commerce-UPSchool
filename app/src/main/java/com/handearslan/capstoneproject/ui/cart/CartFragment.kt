@@ -89,16 +89,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
                 }
             }
         }
-        viewModel.totalPrice.observe(viewLifecycleOwner)
-        { totalPrice ->
-            tvTotalAmount.text = if (totalPrice > 0) {
-                String.format(
-                    tvTotalAmount.context.getString(R.string.product_price),
-                    totalPrice
-                )
-            } else {
-                tvTotalAmount.context.getString(R.string.zero_price)
-            }
+        viewModel.totalPrice.observe(viewLifecycleOwner) { totalPrice ->
+            tvTotalAmount.text = "${totalPrice.toString()} ₺"
         }
     }
 

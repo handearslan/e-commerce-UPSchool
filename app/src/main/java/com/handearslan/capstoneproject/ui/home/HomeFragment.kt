@@ -34,11 +34,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             rvProducts.adapter = productAdapter
 
             rvSaleProduct.adapter = saleProductAdapter
-
-            ibLogOut.setOnClickListener {
-                findNavController().setGraph(R.navigation.login_graph)
-                viewModel.logOut()
-            }
         }
         observeData()
     }

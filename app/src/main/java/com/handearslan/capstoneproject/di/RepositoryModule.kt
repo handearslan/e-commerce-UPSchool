@@ -1,6 +1,7 @@
 package com.handearslan.capstoneproject.di
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import com.handearslan.capstoneproject.data.source.local.ProductDao
@@ -21,5 +22,5 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository() : AuthRepository = AuthRepository(firebaseAuth = FirebaseAuth.getInstance())
+    fun provideAuthRepository() : AuthRepository = AuthRepository(firebaseAuth = FirebaseAuth.getInstance(),firebaseFirestore = FirebaseFirestore.getInstance())
 }

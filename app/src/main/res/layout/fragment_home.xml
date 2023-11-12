@@ -129,17 +129,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_empty"
                 tools:text="empty" />
 
-            <ImageView
-                android:id="@+id/ib_log_out"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:padding="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_app_title"
-                app:srcCompat="@drawable/ic_log_out"
-                app:tint="@color/soft_pink" />
 
             <ProgressBar
                 android:id="@+id/pb_products"
@@ -154,18 +143,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_products"
                 tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:text="Log Out"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_app_title"
-                app:layout_constraintEnd_toEndOf="@+id/ib_log_out"
-                app:layout_constraintStart_toStartOf="@+id/ib_log_out"
-                app:layout_constraintTop_toBottomOf="@+id/ib_log_out" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

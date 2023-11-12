@@ -79,4 +79,9 @@
             android:id="@+id/successToHome"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.handearslan.capstoneproject.ui.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>

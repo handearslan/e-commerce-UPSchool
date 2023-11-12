@@ -41,8 +41,5 @@
     <string name="favorites">Favorites</string>
     <string name="cart">Cart</string>
     <string name="search">Search</string>
-    <string name="product_price">%s ₺</string>
-    <string name="zero_price">0.00</string>
     <string name="total_price">Total Price</string>
-
 </resources>

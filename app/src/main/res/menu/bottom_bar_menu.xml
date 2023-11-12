@@ -18,4 +18,8 @@
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_fav"
         android:title="Favorites" />
+    <item
+        android:id="@+id/userFragment"
+        android:icon="@drawable/ic_user"
+        android:title="User" />
 </menu>
