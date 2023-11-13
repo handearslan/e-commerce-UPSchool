@@ -56,8 +56,11 @@ class AuthRepository(
 
             if (documentSnapshot.exists()) {
                 val user = documentSnapshot.toObject(User::class.java)
-                user?.let { Resource.Success(it.copy(userId = documentSnapshot.id)) }
-                    ?: Resource.Error("User is null")
+                if (user != null) {
+                    Resource.Success(user.copy(userId = documentSnapshot.id))
+                } else {
+                    Resource.Error("User information is invalid.")
+                }
             } else {
                 Resource.Error("User not found")
             }

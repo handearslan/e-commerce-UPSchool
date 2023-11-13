@@ -9,6 +9,8 @@ import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.databinding.FragmentPaymentBinding
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.handearslan.capstoneproject.common.gone
+import com.handearslan.capstoneproject.common.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,46 +30,36 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
             }
 
             btnCompletePayment.setOnClickListener {
-                val addressTitle = etAddressTitle.text.toString()
-                val address = etAddress.text.toString()
-                val city = etCity.text.toString()
-                val district = etDistrict.text.toString()
-                val cardOwner = etCardOwner.text.toString()
-                val cardNumber = etCardNumber.text.toString()
-                val month = etMonth.text.toString()
-                val year = etYear.text.toString()
-                val cvc = etCvc.text.toString()
-                val isValid = viewModel.checkInfo(
-                    addressTitle,
-                    address,
-                    city,
-                    district,
-                    cardOwner,
-                    cardNumber,
-                    month,
-                    year,
-                    cvc
+                viewModel.checkInfo(
+                    etAddressTitle.text.toString(),
+                    etAddress.text.toString(),
+                    etCity.text.toString(),
+                    etDistrict.text.toString(),
+                    etCardOwner.text.toString(),
+                    etCardNumber.text.toString(),
+                    etMonth.text.toString(),
+                    etYear.text.toString(),
+                    etCvc.text.toString()
                 )
-
-                if (isValid) {
-                    viewModel.clearCart()
-                } else {
-                    Snackbar.make(requireView(), R.string.invalid_payment, Snackbar.LENGTH_SHORT)
-                        .show()
-                }
+                viewModel.clearCart()
             }
         }
+
         observePayment()
     }
 
-    private fun observePayment() {
+    private fun observePayment() = with(binding) {
         viewModel.paymentState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is PaymentState.ClearCart -> {
+                PaymentState.Loading -> pbPayment.visible()
+
+                is PaymentState.SuccessState -> {
+                    pbPayment.gone()
                     findNavController().navigate(R.id.paymentToSuccess)
                 }
 
                 is PaymentState.ShowSnackbar -> {
+                    pbPayment.gone()
                     Snackbar.make(requireView(), state.errorMessage, Snackbar.LENGTH_SHORT).show()
                 }
             }

@@ -330,7 +330,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_card_info" />
 
     <ProgressBar
-        android:id="@+id/pb_detail"
+        android:id="@+id/pb_payment"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

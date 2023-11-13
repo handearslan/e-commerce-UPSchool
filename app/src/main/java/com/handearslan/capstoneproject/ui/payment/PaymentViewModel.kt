@@ -25,10 +25,11 @@ class PaymentViewModel @Inject constructor(
     fun clearCart() = viewModelScope.launch {
         val result = productRepository.clearCart(authRepository.getCurrentUserId())
         _paymentState.value = when (result) {
-            is Resource.Success -> PaymentState.ClearCart("Success")
+            is Resource.Success -> PaymentState.SuccessState
             else -> PaymentState.ShowSnackbar("Failed")
         }
     }
+
 
     fun checkInfo(
         addressTitle: String,
@@ -40,14 +41,23 @@ class PaymentViewModel @Inject constructor(
         month: String,
         year: String,
         cvc: String
-    ): Boolean {
-        return !(addressTitle.isEmpty() || address.isEmpty() || city.isEmpty() || district.isEmpty() ||
-                cardOwner.isEmpty() || cardNumber.length != 16 || cvc.length != 3 ||
-                year.length != 4 || month.length != 2)
+    ) = viewModelScope.launch {
+        _paymentState.value = PaymentState.Loading
+
+        if ((addressTitle.isEmpty() || address.isEmpty() || city.isEmpty() || district.isEmpty() ||
+                    cardOwner.isEmpty() || cardNumber.length != 16 || cvc.length != 3 ||
+                    year.length != 4 || month.length != 2)
+        ) {
+            _paymentState.value = PaymentState.ShowSnackbar("Please fill all the fields")
+
+        } else {
+            _paymentState.value= PaymentState.SuccessState
+        }
     }
 }
 
 sealed interface PaymentState {
-    data class ClearCart(val message: String) : PaymentState
+    object Loading : PaymentState
+    object SuccessState: PaymentState
     data class ShowSnackbar(val errorMessage: String) : PaymentState
 }

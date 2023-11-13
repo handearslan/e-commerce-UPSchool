@@ -1,6 +1,5 @@
 package com.handearslan.capstoneproject.data.repository
 
-import com.google.firebase.auth.FirebaseAuth
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.mapper.mapProductEntityToProductUI
 import com.handearslan.capstoneproject.data.mapper.mapProductToProductUI
