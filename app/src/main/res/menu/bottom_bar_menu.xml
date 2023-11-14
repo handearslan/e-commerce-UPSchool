@@ -19,7 +19,7 @@
         android:icon="@drawable/ic_fav"
         android:title="Favorites" />
     <item
-        android:id="@+id/userFragment"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_user"
-        android:title="User" />
+        android:title="Profile" />
 </menu>

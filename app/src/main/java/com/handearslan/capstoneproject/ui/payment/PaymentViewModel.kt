@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
-import com.handearslan.capstoneproject.data.model.request.ClearCartRequest
 import com.handearslan.capstoneproject.data.repository.AuthRepository
 import com.handearslan.capstoneproject.data.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +28,6 @@ class PaymentViewModel @Inject constructor(
             else -> PaymentState.ShowSnackbar("Failed")
         }
     }
-
 
     fun checkInfo(
         addressTitle: String,

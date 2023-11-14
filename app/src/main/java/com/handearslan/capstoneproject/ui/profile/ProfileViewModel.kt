@@ -1,4 +1,4 @@
-package com.handearslan.capstoneproject.ui.user
+package com.handearslan.capstoneproject.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.handearslan.capstoneproject.common.Resource
 import com.handearslan.capstoneproject.data.repository.AuthRepository
-import com.handearslan.capstoneproject.ui.auth.signIn.SignInState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val authRepository: AuthRepository

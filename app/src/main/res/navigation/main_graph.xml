@@ -80,8 +80,8 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/userFragment"
-        android:name="com.handearslan.capstoneproject.ui.user.UserFragment"
+        android:id="@+id/profileFragment"
+        android:name="com.handearslan.capstoneproject.ui.profile.ProfileFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>

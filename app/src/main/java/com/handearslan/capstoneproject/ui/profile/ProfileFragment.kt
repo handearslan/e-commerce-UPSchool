@@ -1,4 +1,4 @@
-package com.handearslan.capstoneproject.ui.user
+package com.handearslan.capstoneproject.ui.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,13 +9,13 @@ import com.handearslan.capstoneproject.R
 import com.handearslan.capstoneproject.common.gone
 import com.handearslan.capstoneproject.common.viewBinding
 import com.handearslan.capstoneproject.common.visible
-import com.handearslan.capstoneproject.databinding.FragmentUserBinding
+import com.handearslan.capstoneproject.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserFragment : Fragment(R.layout.fragment_user) {
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
-    private val binding by viewBinding(FragmentUserBinding::bind)
+    private val binding by viewBinding(FragmentProfileBinding::bind)
 
     private val viewModel: UserViewModel by viewModels()
 

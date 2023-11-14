@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
-                    R.id.homeFragment, R.id.searchFragment, R.id.cartFragment, R.id.favoritesFragment, R.id.userFragment -> {
+                    R.id.homeFragment, R.id.searchFragment, R.id.cartFragment, R.id.favoritesFragment, R.id.profileFragment -> {
                         bottomNav.visibility = View.VISIBLE
                     }
                     else -> {
