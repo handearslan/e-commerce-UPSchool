@@ -18,7 +18,7 @@
 |<img src="https://github.com/handearslan/e-commerce-UPSchool/assets/112904859/b66f5fbb-81b8-4bd0-8e91-6fac749f1600" width="250" height="500"/>|<img src="https://github.com/handearslan/e-commerce-UPSchool/assets/112904859/b7bf942a-5b94-481e-936b-8978aebdc8b1" width="250" height="500"/>|
 
 ## 📹 Video
-[https://drive.google.com/file/d/10HhOwPauJi4-htrNPMjgJGxPVofd_rCl/view?usp=sharing](https://drive.google.com/file/d/1SIPpFdOdzeNGN1B02idx3nNhgBgy8qlE/view?usp=sharing)
+https://drive.google.com/file/d/1SIPpFdOdzeNGN1B02idx3nNhgBgy8qlE/view?usp=drive_link
 
 ## 💫 Presentation
 [handearslan-UPSchool.pptx](https://github.com/handearslan/e-commerce-UPSchool/files/13344375/handearslan-UPSchool.pptx)
