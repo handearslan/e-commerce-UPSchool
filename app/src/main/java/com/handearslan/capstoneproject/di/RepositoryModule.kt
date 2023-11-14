@@ -18,9 +18,11 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideProductRepository(productService: ProductService,productDao: ProductDao) = ProductRepository(productService,productDao)
+    fun provideProductRepository(productService: ProductService, productDao: ProductDao) =
+        ProductRepository(productService, productDao)
 
     @Singleton
     @Provides
-    fun provideAuthRepository() : AuthRepository = AuthRepository(firebaseAuth = FirebaseAuth.getInstance(),firebaseFirestore = FirebaseFirestore.getInstance())
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore) =
+        AuthRepository(firebaseAuth, firebaseFirestore)
 }

@@ -39,7 +39,8 @@ class SearchAdapter(
                 if (product.saleState == true) {
                     tvSearchSalePrice.visibility = View.VISIBLE
                     tvSearchSalePrice.text = "${product.salePrice} ₺"
-                    tvSearchPrice.paintFlags = tvSearchPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    tvSearchPrice.paintFlags =
+                        tvSearchPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
                     tvSearchSalePrice.visibility = View.GONE
                     tvSearchPrice.paintFlags = 0

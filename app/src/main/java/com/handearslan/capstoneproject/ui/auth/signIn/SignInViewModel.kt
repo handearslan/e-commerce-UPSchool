@@ -29,7 +29,7 @@ class SignInViewModel @Inject constructor(private val authRepository: AuthReposi
 
     fun checkInfo(email: String, password: String) {
         when {
-            email.isEmpty() ->  {
+            email.isEmpty() -> {
                 _signInState.value = SignInState.ShowSnackbar("Email can not be empty")
             }
 
@@ -39,7 +39,8 @@ class SignInViewModel @Inject constructor(private val authRepository: AuthReposi
             }
 
             password.length < 6 -> {
-                _signInState.value = SignInState.ShowSnackbar("Password can not be less than 6 characters")
+                _signInState.value =
+                    SignInState.ShowSnackbar("Password can not be less than 6 characters")
                 false
             }
 

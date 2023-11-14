@@ -47,7 +47,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         observeData()
     }
 
-    private fun observeData()= with(binding) {
+    private fun observeData() = with(binding) {
         viewModel.searchState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 SearchState.Loading -> {

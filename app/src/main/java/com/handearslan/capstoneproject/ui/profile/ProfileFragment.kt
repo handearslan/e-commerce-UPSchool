@@ -17,7 +17,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val binding by viewBinding(FragmentProfileBinding::bind)
 
-    private val viewModel: UserViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,21 +36,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun observeData() = with(binding) {
-        viewModel.userState.observe(viewLifecycleOwner) { state ->
+        viewModel.profileState.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is UserState.Loading -> pbUser.visible()
+                is ProfileState.Loading -> pbUser.visible()
 
-                is UserState.SuccessState -> {
+                is ProfileState.SuccessState -> {
                     pbUser.gone()
                     tvUserEmail.text = state.email
                 }
 
-                is UserState.EmptyScreen -> {
+                is ProfileState.EmptyScreen -> {
                     pbUser.gone()
 
                 }
 
-                is UserState.ShowSnackbar -> {
+                is ProfileState.ShowSnackbar -> {
                     pbUser.gone()
 
                 }

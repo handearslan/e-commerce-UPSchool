@@ -42,20 +42,29 @@ class PaymentViewModel @Inject constructor(
     ) = viewModelScope.launch {
         _paymentState.value = PaymentState.Loading
 
-        if ((addressTitle.isEmpty() || address.isEmpty() || city.isEmpty() || district.isEmpty() ||
-                    cardOwner.isEmpty() || cardNumber.length != 16 || cvc.length != 3 ||
-                    year.length != 4 || month.length != 2)
-        ) {
-            _paymentState.value = PaymentState.ShowSnackbar("Please fill all the fields")
+        val errorMessage = when {
+            cardOwner.isEmpty() -> "Please enter Card Owner"
+            cardNumber.length != 16 -> "Card Number must be 16 digits"
+            month.length != 2 -> "Please enter a valid Month"
+            year.length != 4 -> "Please enter a valid Year"
+            cvc.length != 3 -> "CVC must be 3 digits"
+            city.isEmpty() -> "Please enter City"
+            district.isEmpty() -> "Please enter District"
+            address.isEmpty() -> "Please enter Address"
+            addressTitle.isEmpty() -> "Please enter Address Title"
+            else -> null
+        }
 
-        } else {
-            _paymentState.value= PaymentState.SuccessState
+        errorMessage?.let {
+            _paymentState.value = PaymentState.ShowSnackbar(it)
+        } ?: run {
+            clearCart()
         }
     }
 }
 
 sealed interface PaymentState {
     object Loading : PaymentState
-    object SuccessState: PaymentState
+    object SuccessState : PaymentState
     data class ShowSnackbar(val errorMessage: String) : PaymentState
 }

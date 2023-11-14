@@ -10,6 +10,6 @@ data class ProductUI(
     val category: String,
     val imageOne: String,
     val rate: Double,
-    val count : Int,
+    val count: Int,
     val isFav: Boolean = false,
 )

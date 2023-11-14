@@ -29,7 +29,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 val email = etEmail.text.toString()
                 val password = etPassword.text.toString()
 
-                viewModel.checkInfo(email,password)
+                viewModel.checkInfo(email, password)
             }
             tvSignInUp.setOnClickListener {
                 findNavController().navigate(R.id.signInToSıgnUp)
@@ -38,9 +38,9 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         observeSignIn()
     }
 
-    private fun observeSignIn() = with(binding){
-        viewModel.signInState.observe(viewLifecycleOwner) {state->
-            when(state){
+    private fun observeSignIn() = with(binding) {
+        viewModel.signInState.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 SignInState.Loading -> pbSignIn.visible()
 
                 SignInState.SuccessState -> {

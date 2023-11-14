@@ -11,25 +11,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(
+class ProfileViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
 
-    private var _userState = MutableLiveData<UserState>()
-    val userState: LiveData<UserState> get() = _userState
+    private var _profileState = MutableLiveData<ProfileState>()
+    val profileState: LiveData<ProfileState> get() = _profileState
 
     fun getUser() = viewModelScope.launch {
-        _userState.value = UserState.Loading
+        _profileState.value = ProfileState.Loading
 
         val result = authRepository.getUser(authRepository.getCurrentUserId())
 
-        _userState.value = when (result) {
+        _profileState.value = when (result) {
             is Resource.Success -> {
                 val user = result.data
-                UserState.SuccessState(user?.email.orEmpty())
+                ProfileState.SuccessState(user?.email.orEmpty())
             }
-            is Resource.Fail -> UserState.EmptyScreen(result.failMessage)
-            is Resource.Error -> UserState.ShowSnackbar("Failed to retrieve user data")
+
+            is Resource.Fail -> ProfileState.EmptyScreen(result.failMessage)
+            is Resource.Error -> ProfileState.ShowSnackbar("Failed to retrieve user data")
         }
     }
 
@@ -39,9 +40,9 @@ class UserViewModel @Inject constructor(
     }
 }
 
-sealed interface UserState {
-    object Loading : UserState
-    data class SuccessState(val email: String) : UserState
-    data class EmptyScreen(val failMessage: String) : UserState
-    data class ShowSnackbar(val errorMessage: String) : UserState
+sealed interface ProfileState {
+    object Loading : ProfileState
+    data class SuccessState(val email: String) : ProfileState
+    data class EmptyScreen(val failMessage: String) : ProfileState
+    data class ShowSnackbar(val errorMessage: String) : ProfileState
 }

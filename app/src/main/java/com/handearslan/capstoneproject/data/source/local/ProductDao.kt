@@ -11,7 +11,7 @@ import com.handearslan.capstoneproject.data.model.response.ProductEntity
 interface ProductDao {
 
     @Query("SELECT * FROM fav_products WHERE userId = :userId")
-    suspend fun getProducts(userId : String): List<ProductEntity>
+    suspend fun getProducts(userId: String): List<ProductEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addProduct(productEntity: ProductEntity)
@@ -20,8 +20,8 @@ interface ProductDao {
     suspend fun deleteProduct(productEntity: ProductEntity)
 
     @Query("DELETE FROM fav_products WHERE userId = :userId")
-    suspend fun clearAllFromFavorites(userId : String)
+    suspend fun clearAllFromFavorites(userId: String)
 
     @Query("SELECT productId FROM fav_products WHERE userId= :userId")
-    suspend fun getProductIds(userId : String): List<Int>
+    suspend fun getProductIds(userId: String): List<Int>
 }

@@ -3,7 +3,6 @@ package com.handearslan.capstoneproject.data.model.response
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.intellij.lang.annotations.Identifier
 
 @Entity(tableName = "fav_products")
 data class ProductEntity(
@@ -42,4 +41,4 @@ data class ProductEntity(
     @ColumnInfo(name = "count")
     val count: Int?,
 
-)
+    )

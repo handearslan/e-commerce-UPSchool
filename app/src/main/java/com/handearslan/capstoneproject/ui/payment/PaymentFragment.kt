@@ -41,7 +41,6 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
                     etYear.text.toString(),
                     etCvc.text.toString()
                 )
-                viewModel.clearCart()
             }
         }
 
@@ -56,6 +55,7 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
                 is PaymentState.SuccessState -> {
                     pbPayment.gone()
                     findNavController().navigate(R.id.paymentToSuccess)
+
                 }
 
                 is PaymentState.ShowSnackbar -> {

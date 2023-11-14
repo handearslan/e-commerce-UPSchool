@@ -11,16 +11,16 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(private val authRepository: AuthRepository) :
     ViewModel() {
 
-        private var _splashState = MutableLiveData<SplashState>()
-        val splashState: LiveData<SplashState> get() = _splashState
+    private var _splashState = MutableLiveData<SplashState>()
+    val splashState: LiveData<SplashState> get() = _splashState
 
-       fun checkUserLoggedIn() {
-           _splashState.value = if (authRepository.isUserLoggedIn()) {
-               SplashState.UserLoggedIn
-           } else {
-               SplashState.UserNotLoggedIn
-           }
-       }
+    fun checkUserLoggedIn() {
+        _splashState.value = if (authRepository.isUserLoggedIn()) {
+            SplashState.UserLoggedIn
+        } else {
+            SplashState.UserNotLoggedIn
+        }
+    }
 }
 
 sealed interface SplashState {

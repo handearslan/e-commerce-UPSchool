@@ -99,7 +99,8 @@ class ProductRepository(
     suspend fun onDeleteClick(id: Int, userId: String): Resource<BaseResponse> =
         withContext(Dispatchers.IO) {
             try {
-                val response = productService.deleteFromCart(DeleteFromCartRequest(userId, id)).body()
+                val response =
+                    productService.deleteFromCart(DeleteFromCartRequest(userId, id)).body()
                 if (response?.status == 200) {
                     Resource.Success(response)
                 } else {
